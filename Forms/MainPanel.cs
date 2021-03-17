@@ -8,6 +8,7 @@ using AutoMapper;
 using HZH_Controls;
 using HZH_Controls.Controls;
 using HZH_Controls.Forms;
+using MachineryProcessingDemo.helper;
 using Microsoft.Extensions.Configuration;
 using QualityCheckDemo;
 
@@ -62,7 +63,8 @@ namespace MachineryProcessingDemo.Forms
 
         private void MainPanel_Load(object sender, EventArgs e)
         {
-            var addXmlFile = new ConfigurationBuilder().SetBasePath("E:\\project\\visual Studio Project\\MachineryProcessingDemo")
+            //var addXmlFile = new ConfigurationBuilder().SetBasePath("E:\\project\\visual Studio Project\\MachineryProcessingDemo")
+            var addXmlFile = new ConfigurationBuilder().SetBasePath(GlobalClass.Xml)
                 .AddXmlFile("config.xml");
             var configuration = addXmlFile.Build();
             _workshopId = configuration["WorkshopID"];

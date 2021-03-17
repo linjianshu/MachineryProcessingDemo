@@ -60,7 +60,7 @@ namespace QualityCheckDemo
         }
         public enum ProcedureType
         {
-            Tooling = 0 , 
+            Tooling = 5 , 
             Machining = 1,
             Bench = 2,
             Outsourcing = 3,

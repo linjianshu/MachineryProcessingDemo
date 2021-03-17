@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using AutoMapper;
 using HZH_Controls;
 using HZH_Controls.Forms;
+using MachineryProcessingDemo.helper;
 using Microsoft.Extensions.Configuration;
 using QualityCheckDemo;
 using WorkPlatForm.Public_Classes;
@@ -37,7 +38,7 @@ namespace MachineryProcessingDemo.Forms
         public Action RegetAction; 
         private void ScanOfflineForm_Load(object sender, EventArgs e)
         {
-            var addXmlFile = new ConfigurationBuilder().SetBasePath("E:\\project\\visual Studio Project\\MachineryProcessingDemo")
+            var addXmlFile = new ConfigurationBuilder().SetBasePath(GlobalClass.Xml)
                 .AddXmlFile("config.xml");
             var configuration = addXmlFile.Build();
             _workshopId = configuration["WorkshopID"];

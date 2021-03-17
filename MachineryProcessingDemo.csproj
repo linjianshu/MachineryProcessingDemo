@@ -147,13 +147,10 @@
     <Compile Include="Forms\FrmInputs.Designer.cs">
       <DependentUpon>FrmInputs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202103170145274_addStaffID.cs" />
-    <Compile Include="Migrations\202103170145274_addStaffID.Designer.cs">
-      <DependentUpon>202103170145274_addStaffID.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103170148483_changeStaffID.cs" />
-    <Compile Include="Migrations\202103170148483_changeStaffID.Designer.cs">
-      <DependentUpon>202103170148483_changeStaffID.cs</DependentUpon>
+    <Compile Include="helper\GlobalClass.cs" />
+    <Compile Include="Migrations\202103170925436_BuildDatabase.cs" />
+    <Compile Include="Migrations\202103170925436_BuildDatabase.Designer.cs">
+      <DependentUpon>202103170925436_BuildDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="POCO\KitProcessingDocument.cs" />
     <Compile Include="Forms\LoginForm.cs">
@@ -370,11 +367,8 @@
     <EmbeddedResource Include="CustomControls\PictureText.resx">
       <DependentUpon>PictureText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103170145274_addStaffID.resx">
-      <DependentUpon>202103170145274_addStaffID.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103170148483_changeStaffID.resx">
-      <DependentUpon>202103170148483_changeStaffID.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202103170925436_BuildDatabase.resx">
+      <DependentUpon>202103170925436_BuildDatabase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
