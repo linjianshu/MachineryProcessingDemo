@@ -1,7 +1,7 @@
 ﻿
-namespace MachineryProcessingDemo
+namespace MachineryProcessingDemo.Forms
 {
-    partial class LoginForm
+    partial class SelfCheckItemForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,20 +33,21 @@ namespace MachineryProcessingDemo
             // 
             // panel3
             // 
-            this.panel3.Size = new System.Drawing.Size(446, 302);
+            this.panel3.AutoScroll = true;
+            this.panel3.Size = new System.Drawing.Size(485, 435);
             // 
-            // LoginForm
+            // SelfCheckItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.MidnightBlue;
-            this.ClientSize = new System.Drawing.Size(446, 426);
+            this.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.ClientSize = new System.Drawing.Size(485, 559);
             this.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ForeColor = System.Drawing.Color.White;
-            this.Name = "LoginForm";
-            this.Text = "LoginForm";
-            this.Title = "盛鼎---加工中心001";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
+            this.Name = "SelfCheckItemForm";
+            this.Text = "SelfCheckItemForm";
+            this.Title = "自检项";
+            this.Load += new System.EventHandler(this.SelfCheckItemForm_Load);
             this.ResumeLayout(false);
 
         }

@@ -1,5 +1,5 @@
 ﻿
-namespace MachineryProcessingDemo
+namespace MachineryProcessingDemo.Forms
 {
     partial class ScanOnlineForm
     {
@@ -102,14 +102,14 @@ namespace MachineryProcessingDemo
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "产品",
             "工量具"});
             this.comboBox1.Location = new System.Drawing.Point(241, 103);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(143, 32);
+            this.comboBox1.Size = new System.Drawing.Size(143, 33);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.Text = "产品";
             this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);

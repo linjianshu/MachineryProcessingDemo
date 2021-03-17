@@ -14,6 +14,8 @@ namespace MachineryProcessingDemo
         [StringLength(50)]
         public string PushID { get; set; }
 
+        public long StaffID { get; set;  }
+
         [StringLength(50)]
         public string PushCategory { get; set; }
 

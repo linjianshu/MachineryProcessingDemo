@@ -1,5 +1,5 @@
 ﻿
-namespace MachineryProcessingDemo
+namespace MachineryProcessingDemo.Forms
 {
     partial class MainPanel
     {
@@ -65,16 +65,17 @@ namespace MachineryProcessingDemo
             this.ServerStateLbl = new System.Windows.Forms.Label();
             this.ucSignalLamp1 = new HZH_Controls.Controls.UCSignalLamp();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.ProductionTaskQueue = new MachineryProcessingDemo.ThridTitle();
             this.ucDataGridView2 = new HZH_Controls.Controls.UCDataGridView();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.ShiftPlanTxt = new System.Windows.Forms.TextBox();
-            this.CompletedTask = new MachineryProcessingDemo.ThridTitle();
-            this.GeneralTaskStatistics = new MachineryProcessingDemo.ThridTitle();
             this.CompletedPlanTxt = new System.Windows.Forms.TextBox();
             this.ShiftPlanLbl = new System.Windows.Forms.Label();
             this.CompletedPlanLbl = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.ProductionTaskQueue = new MachineryProcessingDemo.ThridTitle();
+            this.CompletedTask = new MachineryProcessingDemo.ThridTitle();
+            this.GeneralTaskStatistics = new MachineryProcessingDemo.ThridTitle();
             this.FirstTitlePanel.SuspendLayout();
             this.SecondTitlePanel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -384,16 +385,16 @@ namespace MachineryProcessingDemo
             this.panel3.Controls.Add(this.ServerStateLbl);
             this.panel3.Controls.Add(this.ucSignalLamp1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 788);
+            this.panel3.Location = new System.Drawing.Point(0, 779);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1358, 20);
+            this.panel3.Size = new System.Drawing.Size(1358, 29);
             this.panel3.TabIndex = 9;
             // 
             // MachiningCenterStateLbl
             // 
             this.MachiningCenterStateLbl.AutoSize = true;
             this.MachiningCenterStateLbl.ForeColor = System.Drawing.Color.White;
-            this.MachiningCenterStateLbl.Location = new System.Drawing.Point(206, 3);
+            this.MachiningCenterStateLbl.Location = new System.Drawing.Point(206, 6);
             this.MachiningCenterStateLbl.Name = "MachiningCenterStateLbl";
             this.MachiningCenterStateLbl.Size = new System.Drawing.Size(69, 20);
             this.MachiningCenterStateLbl.TabIndex = 11;
@@ -405,7 +406,7 @@ namespace MachineryProcessingDemo
             this.ucSignalLamp2.IsShowBorder = false;
             this.ucSignalLamp2.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))))};
-            this.ucSignalLamp2.Location = new System.Drawing.Point(177, 2);
+            this.ucSignalLamp2.Location = new System.Drawing.Point(177, 5);
             this.ucSignalLamp2.Name = "ucSignalLamp2";
             this.ucSignalLamp2.Size = new System.Drawing.Size(18, 18);
             this.ucSignalLamp2.TabIndex = 10;
@@ -415,7 +416,7 @@ namespace MachineryProcessingDemo
             // 
             this.ServerStateLbl.AutoSize = true;
             this.ServerStateLbl.ForeColor = System.Drawing.Color.White;
-            this.ServerStateLbl.Location = new System.Drawing.Point(69, 3);
+            this.ServerStateLbl.Location = new System.Drawing.Point(69, 6);
             this.ServerStateLbl.Name = "ServerStateLbl";
             this.ServerStateLbl.Size = new System.Drawing.Size(54, 20);
             this.ServerStateLbl.TabIndex = 11;
@@ -427,7 +428,7 @@ namespace MachineryProcessingDemo
             this.ucSignalLamp1.IsShowBorder = false;
             this.ucSignalLamp1.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))))};
-            this.ucSignalLamp1.Location = new System.Drawing.Point(40, 2);
+            this.ucSignalLamp1.Location = new System.Drawing.Point(40, 5);
             this.ucSignalLamp1.Name = "ucSignalLamp1";
             this.ucSignalLamp1.Size = new System.Drawing.Size(18, 18);
             this.ucSignalLamp1.TabIndex = 10;
@@ -448,16 +449,8 @@ namespace MachineryProcessingDemo
             this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel9.Location = new System.Drawing.Point(0, 442);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(613, 346);
+            this.panel9.Size = new System.Drawing.Size(613, 337);
             this.panel9.TabIndex = 10;
-            // 
-            // ProductionTaskQueue
-            // 
-            this.ProductionTaskQueue.Location = new System.Drawing.Point(140, 183);
-            this.ProductionTaskQueue.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
-            this.ProductionTaskQueue.Name = "ProductionTaskQueue";
-            this.ProductionTaskQueue.Size = new System.Drawing.Size(353, 37);
-            this.ProductionTaskQueue.TabIndex = 0;
             // 
             // ucDataGridView2
             // 
@@ -504,22 +497,6 @@ namespace MachineryProcessingDemo
             this.ShiftPlanTxt.Size = new System.Drawing.Size(112, 27);
             this.ShiftPlanTxt.TabIndex = 1;
             // 
-            // CompletedTask
-            // 
-            this.CompletedTask.Location = new System.Drawing.Point(153, 7);
-            this.CompletedTask.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.CompletedTask.Name = "CompletedTask";
-            this.CompletedTask.Size = new System.Drawing.Size(279, 44);
-            this.CompletedTask.TabIndex = 0;
-            // 
-            // GeneralTaskStatistics
-            // 
-            this.GeneralTaskStatistics.Location = new System.Drawing.Point(153, 4);
-            this.GeneralTaskStatistics.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.GeneralTaskStatistics.Name = "GeneralTaskStatistics";
-            this.GeneralTaskStatistics.Size = new System.Drawing.Size(279, 40);
-            this.GeneralTaskStatistics.TabIndex = 0;
-            // 
             // CompletedPlanTxt
             // 
             this.CompletedPlanTxt.Location = new System.Drawing.Point(254, 127);
@@ -555,8 +532,37 @@ namespace MachineryProcessingDemo
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(613, 442);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(745, 346);
+            this.panel10.Size = new System.Drawing.Size(745, 337);
             this.panel10.TabIndex = 11;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // ProductionTaskQueue
+            // 
+            this.ProductionTaskQueue.Location = new System.Drawing.Point(140, 183);
+            this.ProductionTaskQueue.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
+            this.ProductionTaskQueue.Name = "ProductionTaskQueue";
+            this.ProductionTaskQueue.Size = new System.Drawing.Size(353, 37);
+            this.ProductionTaskQueue.TabIndex = 0;
+            // 
+            // CompletedTask
+            // 
+            this.CompletedTask.Location = new System.Drawing.Point(153, 7);
+            this.CompletedTask.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.CompletedTask.Name = "CompletedTask";
+            this.CompletedTask.Size = new System.Drawing.Size(279, 44);
+            this.CompletedTask.TabIndex = 0;
+            // 
+            // GeneralTaskStatistics
+            // 
+            this.GeneralTaskStatistics.Location = new System.Drawing.Point(153, 4);
+            this.GeneralTaskStatistics.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.GeneralTaskStatistics.Name = "GeneralTaskStatistics";
+            this.GeneralTaskStatistics.Size = new System.Drawing.Size(279, 40);
+            this.GeneralTaskStatistics.TabIndex = 0;
             // 
             // MainPanel
             // 
@@ -570,7 +576,9 @@ namespace MachineryProcessingDemo
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.SecondTitlePanel1);
             this.Controls.Add(this.FirstTitlePanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainPanel";
+            this.Text = "机加过程管控";
             this.Load += new System.EventHandler(this.MainPanel_Load);
             this.FirstTitlePanel.ResumeLayout(false);
             this.FirstTitlePanel.PerformLayout();
@@ -631,5 +639,6 @@ namespace MachineryProcessingDemo
         private System.Windows.Forms.TextBox ShiftPlanTxt;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView2;
+        private System.Windows.Forms.Timer timer1;
     }
 }

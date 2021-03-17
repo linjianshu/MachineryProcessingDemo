@@ -1,14 +1,14 @@
-﻿using AutoMapper;
-using HZH_Controls.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using HZH_Controls.Controls;
+using AutoMapper;
+using HZH_Controls.Forms;
+using Microsoft.Extensions.Configuration;
+using QualityCheckDemo;
 
-namespace MachineryProcessingDemo
+namespace MachineryProcessingDemo.Forms
 {
     public partial class SelfCheckItemForm : FrmWithOKCancel1
     {
@@ -20,6 +20,12 @@ namespace MachineryProcessingDemo
             _staffCode = staffCode;
             _staffName = staffName;
         }
+        private static string _workshopId;
+        private static string _workshopCode;
+        private static string _workshopName;
+        private static string _equipmentId;
+        private static string _equipmentCode;
+        private static string _equipmentName;
         private static long? _staffId;
         private static string _staffCode;
         private static string _staffName;
@@ -27,57 +33,105 @@ namespace MachineryProcessingDemo
         private static C_ProductProcessing _cProductProcessing;
         private static List<A_ProcedureSelfCheckingConfig> _aProcedureSelfCheckingConfigs;
         public static List<string> _txtNameList = new List<string>();
-        public static List<string> _mbNameList = new List<string>(); 
-
+        public static List<string> _mbNameList = new List<string>();
         public Action ChangeBgColor;
         private void SelfCheckItemForm_Load(object sender, EventArgs e)
         {
+            var addXmlFile = new ConfigurationBuilder().SetBasePath("E:\\project\\visual Studio Project\\MachineryProcessingDemo")
+                .AddXmlFile("config.xml");
+            var configuration = addXmlFile.Build();
+            _workshopId = configuration["WorkshopID"];
+            _workshopCode = configuration["WorkshopCode"];
+            _workshopName = configuration["WorkshopName"];
+            _equipmentId = configuration["EquipmentID"];
+            _equipmentCode = configuration["EquipmentCode"];
+            _equipmentName = configuration["EquipmentName"];
             DataFill();
         }
 
-        public void DataFill()
+        private void DataFill()
         {
             using (var context = new Model())
             {
                 //在产品加工过程表中根据产品出生证  获取元数据
                 _cProductProcessing = context.C_ProductProcessing.FirstOrDefault(s => s.ProductBornCode == _productBornCode);
 
+                if (_cProductProcessing == null)
+                {
+                    FrmDialog.ShowDialog(this, "未检测到上线产品", "警告");
+                    return;
+                }
                 var procedureIdInt16 = Convert.ToInt16(_cProductProcessing.ProcedureID);
 
                 //在工序自检项配置表中根据工序主键/是否启用/有效性  获得自检项数据
                 //类型转换问题  数据库设计有误吗???
                 _aProcedureSelfCheckingConfigs = context.A_ProcedureSelfCheckingConfig.Where(s =>
                     s.ProcedureID == procedureIdInt16 &&
-                    s.IsEnable == true&&s.IsAvailable==true).OrderByDescending(s => s.IsRequired).ToList();
+                    s.IsEnable == true && s.IsAvailable == true).OrderByDescending(s => s.IsRequired).ToList();
 
                 //动态加载txt和lbl控件
                 int tabIndex = 1;
-                int localLblY = 73;
-                int localTextBoxY = 70;
+                int localLblY = 23;
+                int localTextBoxY = 20;
                 foreach (var aProcedureSelfCheckingConfig in _aProcedureSelfCheckingConfigs)
                 {
-                    panel3.Controls.Add(new Label()
+                    var label = new Label();
+                    if (tabIndex % 3 == 2)
                     {
-                        Location = new Point(110, localLblY),
-                        Size = new Size(86, 26),
-                        Text = aProcedureSelfCheckingConfig.ItemName + ':',
-                        ForeColor = Color.Black,
-                        TabIndex = tabIndex,
-                        BackColor = Color.Transparent,
-                        Font = new Font("微软雅黑", 10.8F, FontStyle.Bold,
-                            GraphicsUnit.Point, ((byte)(134))),
-                        Name = aProcedureSelfCheckingConfig.ItemCode + "lbl"
-                    });
-                    localLblY += 60;
+                        label.Location = new Point(310, localLblY);
+                    }
+                    else if (tabIndex%3==0)
+                    {
+                        label.Location = new Point(550, localLblY);
+                    }
+                    else
+                    {
+                        label.Location = new Point(80, localLblY);
+                    }
+                    label.Size = new Size(70, 26);
+                    label.Text = aProcedureSelfCheckingConfig.ItemName + ':';
+                    label.ForeColor = Color.Black;
+                    label.TabIndex = tabIndex;
+                    label.BackColor = Color.Transparent;
+                    label.Font = new Font("微软雅黑", 10.8F, FontStyle.Bold,
+                        GraphicsUnit.Point, ((byte)(134)));
+                    label.Name = aProcedureSelfCheckingConfig.ItemCode + "lbl";
+                    panel3.Controls.Add(label);
 
-                    panel3.Controls.Add(new TextBox()
+                  
+                    if (tabIndex % 3 == 0)
                     {
-                        Location = new Point(204, localTextBoxY),
-                        Size = new Size(168, 32),
-                        Name = aProcedureSelfCheckingConfig.ItemCode + "txt"
-                    });
-                    localTextBoxY += 60;
+                        localLblY += 60;
+                    }
+                    // localLblY += 60;
+
+                    var textBox = new TextBox();
+                    if (tabIndex % 3 == 2)
+                    {
+                        textBox.Location = new Point(390, localTextBoxY);
+                    }
+                    else if (tabIndex % 3 == 0)
+                    {
+                        textBox.Location = new Point(620, localTextBoxY);
+                    }
+                    else
+                    {
+                        textBox.Location = new Point(160, localTextBoxY);
+                    }
+                    // textBox.Location = new Point(130, localTextBoxY);
+                    textBox.Size = new Size(130, 32);
+                    textBox.Name = aProcedureSelfCheckingConfig.ItemCode + "txt";
+                    panel3.Controls.Add(textBox);
+
+                    if (tabIndex % 3 == 0)
+                    {
+                        localTextBoxY += 60;
+                    }
+                    // localTextBoxY += 60;
                     _txtNameList.Add(aProcedureSelfCheckingConfig.ItemCode + "txt");
+
+                    tabIndex++;
+
 
                     if (aProcedureSelfCheckingConfig.IsRequired != null && (bool)aProcedureSelfCheckingConfig.IsRequired)
                     {
@@ -93,7 +147,9 @@ namespace MachineryProcessingDemo
                     var cProductQualityData = context.C_ProductQualityData.FirstOrDefault(s =>
                         s.OrderID == _cProductProcessing.OrderID && s.ProjectID == _cProductProcessing.ProjectID && s.PlanID == _cProductProcessing.PlanID
                         && s.ProductID == _cProductProcessing.ProductID && s.ProductBornCode == _cProductProcessing.ProductBornCode &&
-                        s.ProcedureID == _cProductProcessing.ProcedureID && s.CheckType == 1 && s.ItemCode == aProcedureSelfCheckingConfig.ItemCode);
+                        s.ProcedureID == _cProductProcessing.ProcedureID &&
+                        s.CheckType == (decimal?)CheckType.SelfCheck &&
+                        s.ItemCode == aProcedureSelfCheckingConfig.ItemCode);
 
                     if (cProductQualityData != null && cProductQualityData.CollectValue != null)
                         panel3.Controls[$"{aProcedureSelfCheckingConfig.ItemCode + "txt"}"].Text = cProductQualityData.CollectValue.ToString();
@@ -111,9 +167,9 @@ namespace MachineryProcessingDemo
                 cBWuECntlLogicPro.ProcedureCode = _cProductProcessing.ProcedureCode;
                 cBWuECntlLogicPro.ControlPointID = 2;
                 cBWuECntlLogicPro.Sort = "2";
-                cBWuECntlLogicPro.EquipmentCode = "1";
+                cBWuECntlLogicPro.EquipmentCode = _equipmentCode;
                 cBWuECntlLogicPro.State = "1";
-                cBWuECntlLogicPro.StartTime = DateTime.Now;
+                cBWuECntlLogicPro.StartTime = context.GetServerDate();
 
                 context.C_BWuE_CntlLogicPro.Add(cBWuECntlLogicPro);
                 context.SaveChanges();
@@ -125,7 +181,6 @@ namespace MachineryProcessingDemo
             if (_cProductProcessing == null)
             {
                 FrmDialog.ShowDialog(this, "未检测到上线产品", "警告");
-                // MessageBox.Show("未检测到上线产品");
                 return;
             }
 
@@ -150,10 +205,10 @@ namespace MachineryProcessingDemo
                 //在控制点过程表中 根据产品出生证 工序编号 控制点id 设备编号(需要修改) 查到相关集合
                 var cBWuECntlLogicPros = context.C_BWuE_CntlLogicPro.Where(s =>
                         s.ProductBornCode == _productBornCode && s.ProcedureCode == _cProductProcessing.ProcedureCode
-                                                              && s.ControlPointID == 2 && s.EquipmentCode == "1")
+                                                              && s.ControlPointID == 2 && s.EquipmentCode == _equipmentCode)
                     .OrderByDescending(s => s.StartTime).ToList();
                 cBWuECntlLogicPros[0].State = "2";
-                cBWuECntlLogicPros[0].FinishTime = DateTime.Now;
+                cBWuECntlLogicPros[0].FinishTime = context.GetServerDate();
 
                 //遍历  添加后删除过程表中所有选中数据
                 foreach (var cBWuECntlLogicPro in cBWuECntlLogicPros)
@@ -166,7 +221,6 @@ namespace MachineryProcessingDemo
                     context.C_BWuE_CntlLogicDoc.Add(cBWuECntlLogicDoc);
                     context.C_BWuE_CntlLogicPro.Remove(cBWuECntlLogicPro);
                 }
-
                 context.SaveChanges();
             }
         }
@@ -179,8 +233,8 @@ namespace MachineryProcessingDemo
             {
                 //在产品质量数据表中根据产品出生证和工序号/检验结果为空 来获得录入过的数据
                 var cProductQualityDatas = context.C_ProductQualityData.Where(s =>
-                    s.ProductBornCode == _productBornCode&&s.ProcedureCode==_cProductProcessing.ProcedureCode
-                    &&s.CheckResult==null).OrderBy(s => s.ItemID).ToList();
+                    s.ProductBornCode == _productBornCode && s.ProcedureCode == _cProductProcessing.ProcedureCode
+                    && s.CheckResult == null).OrderBy(s => s.ItemID).ToList();
                 if (cProductQualityDatas.Count > 0)
                 {
                     foreach (var cProductQualityData in cProductQualityDatas)
@@ -191,17 +245,16 @@ namespace MachineryProcessingDemo
                         {
                             cProductQualityData.CollectValue = null;
                         }
-                        else 
+                        else
                         {
                             cProductQualityData.CollectValue = txtDecimalValue;
                         }
 
-                        cProductQualityData.CreateTime = DateTime.Now;
+                        cProductQualityData.CreateTime = context.GetServerDate();
                     }
                     context.SaveChanges();
                     FrmDialog.ShowDialog(this, "自检项录入成功", "录入成功");
                     ChangeBgColor();
-                    // MessageBox.Show("自检项录入成功");
                     Close();
                 }
                 else
@@ -238,15 +291,14 @@ namespace MachineryProcessingDemo
                         {
                             FrmDialog.ShowDialog(this, "输入数据格式不正确", "格式异常");
                             return;
-                            // MessageBox.Show("输入数据格式不正确");
                         }
 
                         //(补充信息)
-                        productQualityData.CheckType = 1;
+                        productQualityData.CheckType = (int?)CheckType.SelfCheck;
                         productQualityData.ItemID = aProcedureSelfCheckingConfig.ID;
                         productQualityData.CheckStaffCode = _staffCode;
                         productQualityData.CheckStaffName = _staffName;
-                        productQualityData.CreateTime = DateTime.Now;
+                        productQualityData.CreateTime = context.GetServerDate();
 
                         context.C_ProductQualityData.Add(productQualityData);
                     }
@@ -268,7 +320,7 @@ namespace MachineryProcessingDemo
                 //录入值
                 var txtValue = panel3.Controls.Find(aProcedureSelfCheckingConfig.ItemCode + "txt", false).First().Text.Trim();
                 var tryParse = decimal.TryParse(txtValue, out var txtDecimalValue);
-                if (tryParse||string.IsNullOrEmpty(txtValue))
+                if (tryParse || string.IsNullOrEmpty(txtValue))
                 {
                     isOk = true;
                 }

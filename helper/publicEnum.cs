@@ -58,4 +58,58 @@ namespace QualityCheckDemo
             OutSourcingOpen = 5 , 
             SquareMaterialOpen = 6
         }
+        public enum ProcedureType
+        {
+            Tooling = 0 , 
+            Machining = 1,
+            Bench = 2,
+            Outsourcing = 3,
+            HotPressing = 4
+        }
+
+        public enum ApsProcedureTaskState
+        {
+            Expired = 0,
+            Completed = 1,
+            ToDo = 2,
+            ToSchedule = 3
+        }
+
+        public enum ApsProcedureTaskDetailState
+        {
+            NotOnline = 1,
+            InExcecution = 2,
+            Completed = 3
+        }
+
+        public enum ProductProcessingOfflineType
+        {
+            Normal = 1 , 
+            Force = 2 , 
+            Bad = 3 
+        }
+
+        public enum ProductProcessingOnlineType
+        {
+            Normal = 1 , 
+            Repair = 2 
+        }
+        public enum PositionType
+        {
+            Machining = 1,
+            Stock = 2
+        }
+
+        public enum PlanProductInfoState
+        {
+            NotOnline = 0 , 
+            InExcecution = 1 , 
+            Completed = 2 
+        }
+
+        public enum CstateState
+        {
+            No = 0 , 
+            Yes  = 1
+        }
 }

@@ -1,5 +1,5 @@
 ﻿
-namespace MachineryProcessingDemo
+namespace MachineryProcessingDemo.Forms
 {
     partial class UserLoginForm
     {
@@ -149,8 +149,9 @@ namespace MachineryProcessingDemo
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.comfirmBtn);
             this.Controls.Add(this.FirstTitlePanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserLoginForm";
-            this.Text = "UserLoginForm";
+            this.Text = "登录";
             this.Load += new System.EventHandler(this.UserLoginForm_Load);
             this.FirstTitlePanel.ResumeLayout(false);
             this.FirstTitlePanel.PerformLayout();

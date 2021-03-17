@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace MachineryProcessingDemo
 {
@@ -10,8 +12,21 @@ namespace MachineryProcessingDemo
         public Model()
             : base("name=DbContext")
         {
+            // Database.CommandTimeout = 10000; 
+            // var connectionState = Database.Connection.State;
+            // if (connectionState == ConnectionState.Closed || connectionState == ConnectionState.Broken)
+            // {
+            //     // Database.Connection.Close();
+            //     MessageBox.Show("服务器异常中断","错误",MessageBoxButtons.OK,MessageBoxIcon.Error,MessageBoxDefaultButton.Button1);
+            // }
         }
 
+        
+        public DateTime GetServerDate()
+        {
+                return Database.SqlQuery<DateTime>("select getdate() as serverDate").First();
+        }
+        public virtual DbSet<KitProcessingDocument> KitProcessingDocument { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<C_BBdbR_CntlPntBase> C_BBdbR_CntlPntBase { get; set; }
         public virtual DbSet<C_BWuE_CntlLogicDoc> C_BWuE_CntlLogicDoc { get; set; }

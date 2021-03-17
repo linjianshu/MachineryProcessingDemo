@@ -45,7 +45,40 @@
     <Reference Include="HZH_Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\HZH_Controls.1.0.14\lib\net40\HZH_Controls.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.5.0.0\lib\net461\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.FileExtensions.5.0.0\lib\net461\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Json, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Json.5.0.0\lib\net461\Microsoft.Extensions.Configuration.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Xml, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Xml.5.0.0\lib\net461\Microsoft.Extensions.Configuration.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.FileProviders.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.FileProviders.Physical.5.0.0\lib\net461\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.FileSystemGlobbing.5.0.0\lib\net461\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Primitives.5.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -53,11 +86,27 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Permissions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Security.Permissions.5.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
@@ -66,7 +115,19 @@
       <HintPath>packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.5.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.5.0.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,30 +140,39 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigAppSettingsHelper.cs" />
-    <Compile Include="FrmInputs.cs">
+    <Compile Include="helper\ConfigAppSettingsHelper.cs" />
+    <Compile Include="Forms\FrmInputs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmInputs.Designer.cs">
+    <Compile Include="Forms\FrmInputs.Designer.cs">
       <DependentUpon>FrmInputs.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Migrations\202103170145274_addStaffID.cs" />
+    <Compile Include="Migrations\202103170145274_addStaffID.Designer.cs">
+      <DependentUpon>202103170145274_addStaffID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103170148483_changeStaffID.cs" />
+    <Compile Include="Migrations\202103170148483_changeStaffID.Designer.cs">
+      <DependentUpon>202103170148483_changeStaffID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\KitProcessingDocument.cs" />
+    <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainPanel.cs">
+    <Compile Include="Forms\MainPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainPanel.Designer.cs">
+    <Compile Include="Forms\MainPanel.Designer.cs">
       <DependentUpon>MainPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="PictureText.cs">
+    <Compile Include="CustomControls\PictureText.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PictureText.Designer.cs">
+    <Compile Include="CustomControls\PictureText.Designer.cs">
       <DependentUpon>PictureText.cs</DependentUpon>
     </Compile>
     <Compile Include="POCO\APS_ProcedureTask.cs" />
@@ -218,7 +288,7 @@
     <Compile Include="POCO\C_WorkshopBaseInformation.cs" />
     <Compile Include="POCO\C__MigrationHistory.cs" />
     <Compile Include="POCO\DataCollect.cs" />
-    <Compile Include="Model.cs" />
+    <Compile Include="helper\Model.cs" />
     <Compile Include="POCO\DefectiveProductProcessing.cs" />
     <Compile Include="POCO\D_DEVICE_STATUS.cs" />
     <Compile Include="POCO\PettyCash.cs" />
@@ -242,56 +312,69 @@
     <Compile Include="POCO\WF_Instance.cs" />
     <Compile Include="POCO\WF_NodeButtonRelation.cs" />
     <Compile Include="POCO\WF_Task.cs" />
-    <Compile Include="ScanOfflineForm.cs">
+    <Compile Include="helper\publicEnum.cs" />
+    <Compile Include="Forms\ScanOfflineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScanOfflineForm.Designer.cs">
+    <Compile Include="Forms\ScanOfflineForm.Designer.cs">
       <DependentUpon>ScanOfflineForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelfCheckItemForm.cs">
+    <Compile Include="Forms\SelfCheckItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelfCheckItemForm.Designer.cs">
+    <Compile Include="Forms\SelfCheckItemForm.Designer.cs">
       <DependentUpon>SelfCheckItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ScanOnlineForm.cs">
+    <Compile Include="Forms\ScanOnlineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScanOnlineForm.Designer.cs">
+    <Compile Include="Forms\ScanOnlineForm.Designer.cs">
       <DependentUpon>ScanOnlineForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ThridTitle.cs">
+    <Compile Include="CustomControls\ThridTitle.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ThridTitle.Designer.cs">
+    <Compile Include="CustomControls\ThridTitle.Designer.cs">
       <DependentUpon>ThridTitle.cs</DependentUpon>
     </Compile>
-    <Compile Include="UCTestGridTable_CustomCell.cs">
+    <Compile Include="CustomControls\UCTestGridTable_CustomCell.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UCTestGridTable_CustomCell.Designer.cs">
+    <Compile Include="CustomControls\UCTestGridTable_CustomCell.Designer.cs">
       <DependentUpon>UCTestGridTable_CustomCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="UCTestGridTable_CustomCellIcon.cs">
+    <Compile Include="CustomControls\UCTestGridTable_CustomCellIcon.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserLoginForm.cs">
+    <Compile Include="Forms\UserLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserLoginForm.Designer.cs">
+    <Compile Include="Forms\UserLoginForm.Designer.cs">
       <DependentUpon>UserLoginForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FrmInputs.resx">
+    <Compile Include="Forms\WorkerGauge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WorkerGauge.Designer.cs">
+      <DependentUpon>WorkerGauge.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\FrmInputs.resx">
       <DependentUpon>FrmInputs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainPanel.resx">
+    <EmbeddedResource Include="Forms\MainPanel.resx">
       <DependentUpon>MainPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PictureText.resx">
+    <EmbeddedResource Include="CustomControls\PictureText.resx">
       <DependentUpon>PictureText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103170145274_addStaffID.resx">
+      <DependentUpon>202103170145274_addStaffID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103170148483_changeStaffID.resx">
+      <DependentUpon>202103170148483_changeStaffID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -302,23 +385,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ScanOfflineForm.resx">
+    <EmbeddedResource Include="Forms\ScanOfflineForm.resx">
       <DependentUpon>ScanOfflineForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ScanOnlineForm.resx">
+    <EmbeddedResource Include="Forms\ScanOnlineForm.resx">
       <DependentUpon>ScanOnlineForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelfCheckItemForm.resx">
+    <EmbeddedResource Include="Forms\SelfCheckItemForm.resx">
       <DependentUpon>SelfCheckItemForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThridTitle.resx">
+    <EmbeddedResource Include="CustomControls\ThridTitle.resx">
       <DependentUpon>ThridTitle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UCTestGridTable_CustomCellIcon.resx">
+    <EmbeddedResource Include="CustomControls\UCTestGridTable_CustomCellIcon.resx">
       <DependentUpon>UCTestGridTable_CustomCellIcon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserLoginForm.resx">
+    <EmbeddedResource Include="Forms\UserLoginForm.resx">
       <DependentUpon>UserLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WorkerGauge.resx">
+      <DependentUpon>WorkerGauge.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -330,10 +416,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Setting.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="config.xml" />
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions />
 </Project>

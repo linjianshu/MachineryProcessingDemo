@@ -69,8 +69,7 @@ namespace MachineryProcessingDemo
         [StringLength(200)]
         public string Remarks { get; set; }
 
-        [StringLength(50)]
-        public string Reserve1 { get; set; }
+        public int? Reserve1 { get; set; }
 
         [StringLength(50)]
         public string Reserve2 { get; set; }

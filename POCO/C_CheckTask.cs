@@ -82,5 +82,8 @@ namespace MachineryProcessingDemo
 
         [StringLength(50)]
         public string Reserve3 { get; set; }
+        
+        [StringLength(50)]
+        public string WorkerCode { get; set;  }
     }
 }
