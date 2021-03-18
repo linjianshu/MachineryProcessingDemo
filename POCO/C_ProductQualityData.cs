@@ -9,6 +9,8 @@ namespace MachineryProcessingDemo
     [Table("_ProductQualityData")]
     public partial class C_ProductQualityData
     {
+
+
         public long ID { get; set; }
 
         public long? OrderID { get; set; }
@@ -104,5 +106,6 @@ namespace MachineryProcessingDemo
 
         [StringLength(50)]
         public string Reserve3 { get; set; }
+        public int? Online_type { get; set;  }
     }
 }

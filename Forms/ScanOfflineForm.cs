@@ -37,6 +37,7 @@ namespace MachineryProcessingDemo.Forms
         public Action ClearMainPanelTxt;
         public Action RegetProcedureTasksDetails;
         public Action HideLabel;
+        public Action ResetProductPhoto; 
 
         private void ScanOfflineForm_Load(object sender, EventArgs e)
         {
@@ -190,8 +191,14 @@ namespace MachineryProcessingDemo.Forms
                     //我们分开来考虑：① 该工序抽检：1.首件2.达到送检频率3.不良下机4.返修5 上件质检结果为NG 的也要送检
                     // ②：该工序不抽检：不良下机，返修
 
+                     if (_cProductProcessing.Online_type == (decimal?)ProductProcessingOnlineType.Repair)
+                    {
+                        GenerateProcessTask((int)CheckReason.Repair);
+                        RemarkInspect();
+                        FrmDialog.ShowDialog(this, "请将此 产品送至质检中心,等待进一步检验结果!");
+                    }
                     //如果是不良下机则生成过程检验任务
-                    if (comboBox1.Text.Trim().Equals("不良下机"))
+                     else if (comboBox1.Text.Trim().Equals("不良下机"))
                     {
                         GenerateProcessTask((int)CheckReason.Bad);
                         RemarkInspect();
@@ -214,13 +221,7 @@ namespace MachineryProcessingDemo.Forms
                         DelFirstRecord();
                     }
                     //如果是返修上线则生成过程检验任务
-                    else if (_cProductProcessing.Online_type == (decimal?)ProductProcessingOnlineType.Repair)
-                    {
-                        //还没测试
-                        GenerateProcessTask((int)CheckReason.Repair);
-                        RemarkInspect();
-                        FrmDialog.ShowDialog(this, "请将此 产品送至质检中心,等待进一步检验结果!");
-                    }
+                    
                     //如果上件产品送检结果为NG则生成过程检验任务
                     else if (isChecked && IsNotGood())
                     {
@@ -253,6 +254,7 @@ namespace MachineryProcessingDemo.Forms
 
                 //产品加工过程表转档
                 ProductProcessingDocTurn();
+                //ResetProductPhoto(); 
                 FrmDialog.ShowDialog(this, "产品下线成功", "提示");
                 ChangeBgColor();
                 RegetProcedureTasksDetails();
@@ -405,13 +407,25 @@ namespace MachineryProcessingDemo.Forms
         {
             using (var context = new Model())
             {
-                //在工序任务表里 根据订单号/计划号/项目号/产品号/工序号/设备号获得元数据
+                //最近新修改过的 apsdetail表中根据出生证/有效性/工序编号/设备号/状态/ 按照创建时间排序 获得最新的
+                var apsProcedureTaskDetail = context.APS_ProcedureTaskDetail.Where(s =>
+                    s.ProductBornCode == _cProductProcessing.ProductBornCode && s.IsAvailable == true
+                                                                             && s.ProcedureCode == _cProductProcessing.ProcedureCode &&
+                                                                             s.EquipmentCode == _cProductProcessing.EquipmentCode &&
+                                                                             s.TaskState == (decimal?) ApsProcedureTaskDetailState.Completed)
+                    .OrderByDescending(s=>s.CreateTime).FirstOrDefault();
+
                 var apsProcedureTask = context.APS_ProcedureTask.First(s =>
-                    s.OrderID == _cProductProcessing.OrderID && s.PlanCode == _cProductProcessing.PlanCode &&
-                    s.ProjectCode == _cProductProcessing.ProjectCode &&
-                    s.ProductCode == _cProductProcessing.ProductCode &&
-                    s.ProcedureCode == _cProductProcessing.ProcedureCode &&
-                    s.EquipmentID == _cProductProcessing.EquipmentID);
+                    s.ID == apsProcedureTaskDetail.TaskTableID && s.IsAvailable == true); 
+
+
+                // //在工序任务表里 根据订单号/计划号/项目号/产品号/工序号/设备号获得元数据
+                // var apsProcedureTask = context.APS_ProcedureTask.First(s =>
+                //     s.OrderID == _cProductProcessing.OrderID && s.PlanCode == _cProductProcessing.PlanCode &&
+                //     s.ProjectCode == _cProductProcessing.ProjectCode &&
+                //     s.ProductCode == _cProductProcessing.ProductCode &&
+                //     s.ProcedureCode == _cProductProcessing.ProcedureCode &&
+                //     s.EquipmentID == _cProductProcessing.EquipmentID);
 
                 var count = context.APS_ProcedureTaskDetail.Count(s =>
                     s.EquipmentID == _cProductProcessing.EquipmentID && s.TaskTableID == apsProcedureTask.ID &&
@@ -438,7 +452,9 @@ namespace MachineryProcessingDemo.Forms
             {
                 var cProductQualityDatas = context.C_ProductQualityData.Where(s =>
                     s.ProductBornCode == _cProductProcessing.ProductBornCode &&
-                    s.PlanID == _cProductProcessing.PlanID && s.OfflineStaffID == null && s.ProcedureCode == _cProductProcessing.ProcedureCode).ToList();
+                    s.PlanID == _cProductProcessing.PlanID && s.OfflineStaffID == null &&
+                    s.ProcedureCode == _cProductProcessing.ProcedureCode &&
+                    s.Online_type == _cProductProcessing.Online_type).ToList();
 
                 foreach (var cProductQualityData in cProductQualityDatas)
                 {
@@ -507,7 +523,7 @@ namespace MachineryProcessingDemo.Forms
                 var apsProcedureTaskDetail = context.APS_ProcedureTaskDetail.First(s =>
                     s.EquipmentID == _cProductProcessing.EquipmentID &&
                     s.ProductBornCode == _cProductProcessing.ProductBornCode &&
-                    s.ProcedureCode == _cProductProcessing.ProcedureCode && s.IsAvailable == true && s.TaskState == (decimal?)ApsProcedureTaskDetailState.InExcecution);
+                    s.ProcedureCode == _cProductProcessing.ProcedureCode && s.IsAvailable == true && s.TaskState == (decimal?)ApsProcedureTaskDetailState.InExecution);
                 apsProcedureTaskDetail.TaskState = (int?)ApsProcedureTaskDetailState.Completed;//已完成
                 apsProcedureTaskDetail.ModifierID = _staffId.ToString();
                 apsProcedureTaskDetail.LastModifiedTime = context.GetServerDate();
@@ -555,7 +571,7 @@ namespace MachineryProcessingDemo.Forms
                 //在工序任务明细表中根据产品出生证/有效性/工序号 获得元数据
                 var apsProcedureTaskDetail = context.APS_ProcedureTaskDetail.First(s =>
                     s.ProductBornCode == _cProductProcessing.ProductBornCode && s.IsAvailable == true &&
-                    s.ProcedureCode == _cProductProcessing.ProcedureCode);
+                    s.ProcedureCode == _cProductProcessing.ProcedureCode&&s.TaskState==(decimal?) ApsProcedureTaskDetailState.InExecution);
                 if (apsProcedureTaskDetail.IsChecked == 1)
                 {
                     return true;
@@ -571,7 +587,7 @@ namespace MachineryProcessingDemo.Forms
                 var apsProcedureTaskDetail = context.APS_ProcedureTaskDetail.First(s =>
                     s.ProductBornCode == _cProductProcessing.ProductBornCode &&
                     s.ProcedureCode == _cProductProcessing.ProcedureCode && s.IsAvailable == true
-                    && s.TaskState == (decimal?)ApsProcedureTaskDetailState.InExcecution);
+                    && s.TaskState == (decimal?)ApsProcedureTaskDetailState.InExecution);
                 apsProcedureTaskDetail.IsInspect = 1;
                 context.SaveChanges();
             }
@@ -718,6 +734,16 @@ namespace MachineryProcessingDemo.Forms
                 cCheckTask.LastModifiedTime = context.GetServerDate();
                 cCheckTask.ModifierID = _staffId;
 
+                //根据任务状态 拿到apsdetail
+                var apsProcedureTaskDetail = context.APS_ProcedureTaskDetail.FirstOrDefault(s =>
+                    s.IsAvailable == true && s.TaskState == (decimal?) ApsProcedureTaskDetailState.InExecution &&
+                    s.ProductBornCode == _cProductProcessing.ProductBornCode &&
+                    s.ProcedureCode == _cProductProcessing.ProcedureCode);
+
+
+                //拿到apsdetail所对应的id 用来和生成的检验任务一一对应
+                cCheckTask.ApsDetailID = apsProcedureTaskDetail.ID;  
+
                 //需要修改如果是手检的话要换人啦兄弟
                 if (checktype == 3)
                 {
@@ -846,7 +872,8 @@ namespace MachineryProcessingDemo.Forms
                 {
                     var apsProcedureTaskDetail = context.APS_ProcedureTaskDetail.First(s =>
                         s.ProductBornCode == cProductProcessingDocument.ProductBornCode && s.ProcedureCode == cProductProcessingDocument.ProcedureCode
-                        && s.IsAvailable == true && s.EquipmentID == _cProductProcessing.EquipmentID);
+                        && s.IsAvailable == true && s.EquipmentID == _cProductProcessing.EquipmentID&&s.TaskState==(decimal?) ApsProcedureTaskDetailState.Completed
+                    );
                     //如果是送检的话
                     if (apsProcedureTaskDetail.IsInspect == 1)
                     {

@@ -10,8 +10,8 @@
 	<WorkshopName>加工中心001</WorkshopName>
 	<!-- <WorkshopName>加工中心002</WorkshopName> -->
 
-<EquipmentID>1</EquipmentID>
-<!-- <EquipmentID>2</EquipmentID> -->
+<!-- <EquipmentID>1</EquipmentID> -->
+<EquipmentID>11</EquipmentID>
 <!-- <EquipmentID>3</EquipmentID> -->
 <!-- <EquipmentID>4</EquipmentID> -->
 <!-- <EquipmentID>5</EquipmentID> -->
@@ -21,8 +21,8 @@
 <!-- <EquipmentID>9</EquipmentID> -->
 <!-- <EquipmentID>10</EquipmentID> -->
 
-	<EquipmentCode>001</EquipmentCode>
-	<!-- <EquipmentCode>002</EquipmentCode> -->
+	<!-- <EquipmentCode>001</EquipmentCode> -->
+	<EquipmentCode>011</EquipmentCode>
 	<!-- <EquipmentCode>003</EquipmentCode> -->
 	<!-- <EquipmentCode>004</EquipmentCode> -->
 	<!-- <EquipmentCode>005</EquipmentCode> -->

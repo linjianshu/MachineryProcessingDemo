@@ -56,11 +56,5 @@ namespace Test.UC
             //    HZH_Controls.Forms.FrmTips.ShowTipsSuccess(this.FindForm(), "删除：" + m_object.Name);
             //}
         }
-
-
-
-
-
-
     }
 }

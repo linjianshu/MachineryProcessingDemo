@@ -150,7 +150,9 @@ namespace MachineryProcessingDemo.Forms
                         && s.ProductID == _cProductProcessing.ProductID && s.ProductBornCode == _cProductProcessing.ProductBornCode &&
                         s.ProcedureID == _cProductProcessing.ProcedureID &&
                         s.CheckType == (decimal?)CheckType.SelfCheck &&
-                        s.ItemCode == aProcedureSelfCheckingConfig.ItemCode);
+                        s.ItemCode == aProcedureSelfCheckingConfig.ItemCode
+                        &&s.Online_type==_cProductProcessing.Online_type
+                        &&s.OfflineStaffID==null);
 
                     if (cProductQualityData != null && cProductQualityData.CollectValue != null)
                         panel3.Controls[$"{aProcedureSelfCheckingConfig.ItemCode + "txt"}"].Text = cProductQualityData.CollectValue.ToString();
@@ -235,7 +237,8 @@ namespace MachineryProcessingDemo.Forms
                 //在产品质量数据表中根据产品出生证和工序号/检验结果为空 来获得录入过的数据
                 var cProductQualityDatas = context.C_ProductQualityData.Where(s =>
                     s.ProductBornCode == _productBornCode && s.ProcedureCode == _cProductProcessing.ProcedureCode
-                    && s.CheckResult == null).OrderBy(s => s.ItemID).ToList();
+                    && s.CheckResult == null && s.Online_type == _cProductProcessing.Online_type &&
+                    s.OfflineStaffCode == null).OrderBy(s => s.ItemID).ToList();
                 if (cProductQualityDatas.Count > 0)
                 {
                     foreach (var cProductQualityData in cProductQualityDatas)
@@ -252,6 +255,7 @@ namespace MachineryProcessingDemo.Forms
                         }
 
                         cProductQualityData.CreateTime = context.GetServerDate();
+                        cProductQualityData.Online_type = _cProductProcessing.Online_type; 
                     }
                     context.SaveChanges();
                     FrmDialog.ShowDialog(this, "自检项录入成功", "录入成功");
@@ -300,6 +304,7 @@ namespace MachineryProcessingDemo.Forms
                         productQualityData.CheckStaffCode = _staffCode;
                         productQualityData.CheckStaffName = _staffName;
                         productQualityData.CreateTime = context.GetServerDate();
+                        productQualityData.Online_type = _cProductProcessing.Online_type;
 
                         context.C_ProductQualityData.Add(productQualityData);
                     }

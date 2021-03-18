@@ -160,6 +160,18 @@
     <Compile Include="Migrations\202103180815303_lalala.Designer.cs">
       <DependentUpon>202103180815303_lalala.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103200926210_addQualityData_OnlineType.cs" />
+    <Compile Include="Migrations\202103200926210_addQualityData_OnlineType.Designer.cs">
+      <DependentUpon>202103200926210_addQualityData_OnlineType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103200931223_addQualityData_OnlineType1.cs" />
+    <Compile Include="Migrations\202103200931223_addQualityData_OnlineType1.Designer.cs">
+      <DependentUpon>202103200931223_addQualityData_OnlineType1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103210918359_addhuishen.cs" />
+    <Compile Include="Migrations\202103210918359_addhuishen.Designer.cs">
+      <DependentUpon>202103210918359_addhuishen.cs</DependentUpon>
+    </Compile>
     <Compile Include="POCO\KitProcessingDocument.cs" />
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
@@ -299,6 +311,7 @@
     <Compile Include="POCO\PettyCash.cs" />
     <Compile Include="POCO\POOrder.cs" />
     <Compile Include="POCO\POOrderEntry.cs" />
+    <Compile Include="POCO\_TripartiteReview.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="POCO\P_DEVICE_ALARM.cs" />
@@ -383,6 +396,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103180815303_lalala.resx">
       <DependentUpon>202103180815303_lalala.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103200926210_addQualityData_OnlineType.resx">
+      <DependentUpon>202103200926210_addQualityData_OnlineType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103200931223_addQualityData_OnlineType1.resx">
+      <DependentUpon>202103200931223_addQualityData_OnlineType1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103210918359_addhuishen.resx">
+      <DependentUpon>202103210918359_addhuishen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

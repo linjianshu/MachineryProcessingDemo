@@ -69,17 +69,19 @@ namespace QualityCheckDemo
 
         public enum ApsProcedureTaskState
         {
-            Expired = 0,
-            Completed = 1,
-            ToDo = 2,
-            ToSchedule = 3
+            WaitPublish =0,
+            ToDo = 1,
+            InExecution = 2,
+            Completed = 3,
         }
 
         public enum ApsProcedureTaskDetailState
         {
             NotOnline = 1,
-            InExcecution = 2,
-            Completed = 3
+            InExecution = 2,
+            Completed = 3,
+            Repair = 4 , 
+            ForceDown = 5
         }
 
         public enum ProductProcessingOfflineType
@@ -111,5 +113,11 @@ namespace QualityCheckDemo
         {
             No = 0 , 
             Yes  = 1
+        }
+
+        public enum QDOrProdutcProOnlineType
+        {
+            Normal = 1 , 
+            Repair = 2 
         }
 }

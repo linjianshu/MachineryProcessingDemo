@@ -11,6 +11,7 @@ namespace MachineryProcessingDemo
     {
         public long ID { get; set; }
 
+        public long ApsDetailID { get; set;  }
         public long? OrderID { get; set; }
 
         [StringLength(50)]

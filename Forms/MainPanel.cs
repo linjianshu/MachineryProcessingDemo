@@ -175,7 +175,7 @@ namespace MachineryProcessingDemo.Forms
 
                     var memoryStream = new MemoryStream(GetProductBase(cProductProcessing.ProductCode).Image);
                     var fromStream = Image.FromStream(memoryStream);
-                    ProductInfo.Image = fromStream; 
+                    ProductInfo.Image = fromStream;
 
                     ProductIDTxt.Text = cProductProcessing.ProductBornCode;
                     ProductIDTxt.ReadOnly = true;
@@ -207,7 +207,7 @@ namespace MachineryProcessingDemo.Forms
         {
             using (var context = new Model())
             {
-                return context.A_ProductBase.FirstOrDefault(s => s.IsAvailable == true && s.ProductCode == productCode); 
+                return context.A_ProductBase.FirstOrDefault(s => s.IsAvailable == true && s.ProductCode == productCode);
             }
         }
 
@@ -446,7 +446,9 @@ namespace MachineryProcessingDemo.Forms
 
                 var count = context.APS_ProcedureTaskDetail.Count(s =>
                     s.EquipmentID == _cProductProcessing.EquipmentID && s.TaskTableID == apsProcedureTask.ID &&
-                    s.TaskState == (decimal?)ApsProcedureTaskDetailState.Completed && s.IsAvailable == true);
+                    s.TaskState != (decimal?)ApsProcedureTaskDetailState.NotOnline &&
+                            s.TaskState != (decimal?)ApsProcedureTaskDetailState.InExecution &&
+                            s.TaskState != (decimal?)ApsProcedureTaskDetailState.Repair && s.IsAvailable == true);
 
                 decimal progressPercent = (decimal)((double)count / apsProcedureTask.ProductNumber);
 
@@ -527,8 +529,8 @@ namespace MachineryProcessingDemo.Forms
                     s.EquipmentID == _cProductProcessing.EquipmentID &&
                     s.ProductBornCode == _cProductProcessing.ProductBornCode &&
                     s.ProcedureCode == _cProductProcessing.ProcedureCode && s.IsAvailable == true &&
-                    s.TaskState == (decimal?)ApsProcedureTaskDetailState.InExcecution);
-                apsProcedureTaskDetail.TaskState = (int?)ApsProcedureTaskDetailState.Completed;//已完成
+                    s.TaskState == (decimal?)ApsProcedureTaskDetailState.InExecution);
+                apsProcedureTaskDetail.TaskState = (int?)ApsProcedureTaskDetailState.ForceDown;//已完成
                 apsProcedureTaskDetail.ModifierID = _staffId.ToString();
                 apsProcedureTaskDetail.LastModifiedTime = context.GetServerDate();
                 context.Entry(apsProcedureTaskDetail).State = EntityState.Modified;
@@ -541,7 +543,7 @@ namespace MachineryProcessingDemo.Forms
         {
             //  自定义表格 装载图片等资源
             List<DataGridViewColumnEntity> lstColumns1 = new List<DataGridViewColumnEntity>
-            { 
+            {
                 new DataGridViewColumnEntity()
                 {
                     Width = 20,
@@ -576,7 +578,7 @@ namespace MachineryProcessingDemo.Forms
         }
 
         //初始化已完成任务列表
-        public void InitialDidTasks()
+        private void InitialDidTasks()
         {
             // 自定义表格 装载图片等资源
             List<DataGridViewColumnEntity> lstColumns = new List<DataGridViewColumnEntity>
@@ -635,6 +637,8 @@ namespace MachineryProcessingDemo.Forms
 
             if (!HasExitProductTask())
             {
+                ProductInfo.Image = null;
+
                 ProductNameTxt.Clear();
                 ProductIDTxt.Clear();
                 CurrentProcessTxt.Clear();
@@ -679,13 +683,17 @@ namespace MachineryProcessingDemo.Forms
                                         Color.LightSlateGray;
                                 }
                             };
-                            if (scanOnlineForm.CheckTaskValidity(apsProcedureTaskDetail.ProcedureCode))
+                            if (scanOnlineForm.CheckTaskValidity(apsProcedureTaskDetail.ProcedureCode, apsProcedureTaskDetail.TaskState, out var isRepair))
                             {
                                 scanOnlineForm.AddCntLogicPro();
                                 if (scanOnlineForm.WorkerConfirm())
                                 {
                                     //转档  工序任务明细表=>产品加工过程表
-                                    scanOnlineForm.ProcessTurnArchives();
+                                    scanOnlineForm.ProcessTurnArchives(isRepair);
+
+                                    //修改工序任务表的状态(如果状态不是inexecution的话)
+                                    scanOnlineForm.PerfectApsProcedureTaskState();
+
                                     //完善工序任务明细表中的数据 诸如任务状态 ; 修改人修改时间
                                     scanOnlineForm.PerfectApsDetail();
                                     //完善计划产品出生证表
@@ -733,7 +741,7 @@ namespace MachineryProcessingDemo.Forms
                             }
                         };
 
-                        if (scanOnlineForm.CheckTaskValidity(apsProcedureTaskDetail.ProcedureCode))
+                        if (scanOnlineForm.CheckTaskValidity(apsProcedureTaskDetail.ProcedureCode, apsProcedureTaskDetail.TaskState, out var isRepair))
                         {
                             scanOnlineForm.AddCntLogicPro();
                             //先判断一下本产品出生证的有没有待检验的前序质检任务没做
@@ -763,7 +771,11 @@ namespace MachineryProcessingDemo.Forms
                                 if (scanOnlineForm.WorkerConfirm())
                                 {
                                     //转档  工序任务明细表=>产品加工过程表
-                                    _cProductProcessing = scanOnlineForm.ProcessTurnArchives();
+                                    _cProductProcessing = scanOnlineForm.ProcessTurnArchives(isRepair);
+
+                                    //修改工序任务表的状态(如果状态不是inexecution的话)
+                                    scanOnlineForm.PerfectApsProcedureTaskState();
+
                                     //判断是否抽检
                                     var isChecked = scanOnlineForm.IsChecked();
                                     if (!hasFirstRecord && isChecked)
@@ -832,9 +844,9 @@ namespace MachineryProcessingDemo.Forms
                                     scanOnlineForm.CntLogicTurn();
 
                                     var aProductBase = GetProductBase(_cProductProcessing.ProductCode);
-                                    var memoryStream = new MemoryStream(GetProductBase(aProductBase.ProductCode).Image);
+                                    var memoryStream = new MemoryStream(aProductBase.Image);
                                     var fromStream = Image.FromStream(memoryStream);
-                                    BeginInvoke(new Action((() => ProductInfo.Image = fromStream))); 
+                                    BeginInvoke(new Action((() => ProductInfo.Image = fromStream)));
 
                                     FrmDialog.ShowDialog(this, $"产品{ProductIDTxt.Text}上线成功!", "上线成功");
                                     InialToDoTasks();
@@ -934,7 +946,7 @@ namespace MachineryProcessingDemo.Forms
                             //获得三坐标检验任务
                             var cCheckTask = context.C_CheckTask.FirstOrDefault(s =>
                                 s.ProductBornCode == apsProcedureTaskDetail.ProductBornCode &&
-                                s.ProcedureCode == apsProcedureTaskDetail.ProcedureCode && s.IsAvailable == true);
+                                s.ProcedureCode == apsProcedureTaskDetail.ProcedureCode && s.IsAvailable == true&&s.ApsDetailID==apsProcedureTaskDetail.ID);
                             if (cCheckTask == null)
                             {
                                 apsProcedureTaskDetail.Reserve3 = "加工完毕";
@@ -964,7 +976,8 @@ namespace MachineryProcessingDemo.Forms
                 //在工序任务表中根据设备编号和任务状态和 开始时间排序得到优先级最高的工序任务
                 var apsProcedureTasks = context.APS_ProcedureTask
                     .Where(s => s.EquipmentID.ToString() == _equipmentId &&
-                                s.TaskState == (decimal?)ApsProcedureTaskState.ToDo && s.IsAvailable == true)
+                                s.TaskState != (decimal?)ApsProcedureTaskState.WaitPublish && s.TaskState != (decimal?)ApsProcedureTaskState.Completed
+                                && s.IsAvailable == true)
                     .OrderBy(s => s.StartTime).ToList();
                 foreach (var apsProcedureTask in apsProcedureTasks)
                 {
@@ -995,9 +1008,13 @@ namespace MachineryProcessingDemo.Forms
                             apsProcedureTaskDetail.Reserve1 = "待加工";
                         }
                         else if (apsProcedureTaskDetail.TaskState ==
-                                 (decimal?)ApsProcedureTaskDetailState.InExcecution)
+                                 (decimal?)ApsProcedureTaskDetailState.InExecution)
                         {
                             apsProcedureTaskDetail.Reserve1 = "正在加工";
+                        }
+                        else if (apsProcedureTaskDetail.TaskState == (decimal?)ApsProcedureTaskDetailState.Repair)
+                        {
+                            apsProcedureTaskDetail.Reserve1 = "待返修"; 
                         }
                         else if (apsProcedureTaskDetail.TaskState == (decimal?)ApsProcedureTaskDetailState.Completed)
                         {
@@ -1035,7 +1052,8 @@ namespace MachineryProcessingDemo.Forms
                     if (context.C_ProductQualityData.Any(s =>
                         s.ProductBornCode == ProductIDTxt.Text.Trim() && s.ProcedureCode ==
                                                                       _cProductProcessing.ProcedureCode
-                                                                      && s.CheckType == (decimal?)CheckType.SelfCheck && s.CollectValue != null))
+                                                                      && s.CheckType == (decimal?)CheckType.SelfCheck && s.CollectValue != null
+                                                                      && s.Online_type == _cProductProcessing.Online_type&&s.OfflineStaffID==null))
                     {
                         ProductionStatusInfoPanel.Controls.Find("control002", false).First().BackColor
                             = Color.MediumSeaGreen;
@@ -1078,10 +1096,12 @@ namespace MachineryProcessingDemo.Forms
             var exitProductTask = HasExitProductTask();
             if (!exitProductTask)
             {
+                ProductInfo.Image = null;
                 ProductNameTxt.Clear();
                 ProductIDTxt.Clear();
                 CurrentProcessTxt.Clear();
                 OnlineTimeTxt.Clear();
+
                 var scanOnlineForm = new ScanOnlineForm(_staffId, _staffCode, _staffName, _workshopId, _workshopCode, _workshopName, _equipmentId, _equipmentCode, _equipmentName)
                 {
                     DisplayInfoToMainPanel = (s1, s2, s3, s4) =>
@@ -1113,7 +1133,14 @@ namespace MachineryProcessingDemo.Forms
                          OnlineTimeTxt.ReadOnly = false;
                          ProductionStatusInfoPanel.Controls.Find("control001", false).First().BackColor =
                              Color.LightSlateGray;
-                     }
+                     },
+                    ShowProductImage = (string a) =>
+                    {
+                        var memoryStream = new MemoryStream(GetProductBase(a).Image);
+                        var fromStream = Image.FromStream(memoryStream);
+                        BeginInvoke(new Action((() => ProductInfo.Image = fromStream)));
+                        return true;
+                    }
                 };
                 var controls = scanOnlineForm.Controls.Find("lblTitle", false).First();
                 controls.Visible = false;
@@ -1166,6 +1193,11 @@ namespace MachineryProcessingDemo.Forms
             {
                 ProductionStatusInfoPanel.Controls.Find("control001", false).First().BackColor =
                     Color.MediumSeaGreen;
+
+                //新增加的判断
+                // var memoryStream = new MemoryStream(GetProductBase(_cProductProcessing.ProductCode).Image);
+                // var fromStream = Image.FromStream(memoryStream);
+                // BeginInvoke(new Action((() => ProductInfo.Image)))
                 SelfCheckColorJudge();
             }
         }
@@ -1297,7 +1329,11 @@ namespace MachineryProcessingDemo.Forms
                 HideLabel = () =>
                  {
                      DrawLabel();
-                 }
+                 },
+                ResetProductPhoto = () =>
+                {
+                    BeginInvoke(new Action((() => ProductInfo.Image = null)));
+                }
             };
             var controls = scanOfflineForm.Controls.Find("lblTitle", false).First();
             controls.Visible = false;

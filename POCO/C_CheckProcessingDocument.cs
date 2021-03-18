@@ -105,5 +105,6 @@ namespace MachineryProcessingDemo
 
         [StringLength(50)]
         public string Reserve3 { get; set; }
+        public int Online_Type { get; set; }
     }
 }

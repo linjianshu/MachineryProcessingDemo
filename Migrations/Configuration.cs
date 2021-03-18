@@ -9,7 +9,7 @@ namespace MachineryProcessingDemo.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(MachineryProcessingDemo.Model context)
