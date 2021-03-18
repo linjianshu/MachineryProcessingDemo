@@ -152,6 +152,14 @@
     <Compile Include="Migrations\202103170925436_BuildDatabase.Designer.cs">
       <DependentUpon>202103170925436_BuildDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103180810159_changeImageType.cs" />
+    <Compile Include="Migrations\202103180810159_changeImageType.Designer.cs">
+      <DependentUpon>202103180810159_changeImageType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103180815303_lalala.cs" />
+    <Compile Include="Migrations\202103180815303_lalala.Designer.cs">
+      <DependentUpon>202103180815303_lalala.cs</DependentUpon>
+    </Compile>
     <Compile Include="POCO\KitProcessingDocument.cs" />
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
@@ -370,6 +378,12 @@
     <EmbeddedResource Include="Migrations\202103170925436_BuildDatabase.resx">
       <DependentUpon>202103170925436_BuildDatabase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103180810159_changeImageType.resx">
+      <DependentUpon>202103180810159_changeImageType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103180815303_lalala.resx">
+      <DependentUpon>202103180815303_lalala.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -378,6 +392,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Forms\ScanOfflineForm.resx">
       <DependentUpon>ScanOfflineForm.cs</DependentUpon>
@@ -417,6 +432,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml" />
+    <Content Include="Resources\timi.png" />
+    <Content Include="Resources\wangwang.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

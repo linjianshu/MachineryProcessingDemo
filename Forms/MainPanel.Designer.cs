@@ -65,23 +65,26 @@ namespace MachineryProcessingDemo.Forms
             this.ServerStateLbl = new System.Windows.Forms.Label();
             this.ucSignalLamp1 = new HZH_Controls.Controls.UCSignalLamp();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.ProductionTaskQueue = new MachineryProcessingDemo.ThridTitle();
             this.ucDataGridView2 = new HZH_Controls.Controls.UCDataGridView();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.ShiftPlanTxt = new System.Windows.Forms.TextBox();
+            this.CompletedTask = new MachineryProcessingDemo.ThridTitle();
+            this.GeneralTaskStatistics = new MachineryProcessingDemo.ThridTitle();
             this.CompletedPlanTxt = new System.Windows.Forms.TextBox();
             this.ShiftPlanLbl = new System.Windows.Forms.Label();
             this.CompletedPlanLbl = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.ProductionTaskQueue = new MachineryProcessingDemo.ThridTitle();
-            this.CompletedTask = new MachineryProcessingDemo.ThridTitle();
-            this.GeneralTaskStatistics = new MachineryProcessingDemo.ThridTitle();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.FirstTitlePanel.SuspendLayout();
             this.SecondTitlePanel1.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.OnlineProductInfoPanel.SuspendLayout();
             this.SecondTitlePanel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // TrademarkLbl
@@ -338,6 +341,7 @@ namespace MachineryProcessingDemo.Forms
             // OnlineProductInfoPanel
             // 
             this.OnlineProductInfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.OnlineProductInfoPanel.Controls.Add(this.pictureBox1);
             this.OnlineProductInfoPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.OnlineProductInfoPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.OnlineProductInfoPanel.Location = new System.Drawing.Point(367, 0);
@@ -452,6 +456,14 @@ namespace MachineryProcessingDemo.Forms
             this.panel9.Size = new System.Drawing.Size(613, 337);
             this.panel9.TabIndex = 10;
             // 
+            // ProductionTaskQueue
+            // 
+            this.ProductionTaskQueue.Location = new System.Drawing.Point(140, 183);
+            this.ProductionTaskQueue.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
+            this.ProductionTaskQueue.Name = "ProductionTaskQueue";
+            this.ProductionTaskQueue.Size = new System.Drawing.Size(353, 37);
+            this.ProductionTaskQueue.TabIndex = 0;
+            // 
             // ucDataGridView2
             // 
             this.ucDataGridView2.BackColor = System.Drawing.Color.White;
@@ -497,6 +509,22 @@ namespace MachineryProcessingDemo.Forms
             this.ShiftPlanTxt.Size = new System.Drawing.Size(112, 27);
             this.ShiftPlanTxt.TabIndex = 1;
             // 
+            // CompletedTask
+            // 
+            this.CompletedTask.Location = new System.Drawing.Point(153, 7);
+            this.CompletedTask.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.CompletedTask.Name = "CompletedTask";
+            this.CompletedTask.Size = new System.Drawing.Size(279, 44);
+            this.CompletedTask.TabIndex = 0;
+            // 
+            // GeneralTaskStatistics
+            // 
+            this.GeneralTaskStatistics.Location = new System.Drawing.Point(153, 4);
+            this.GeneralTaskStatistics.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.GeneralTaskStatistics.Name = "GeneralTaskStatistics";
+            this.GeneralTaskStatistics.Size = new System.Drawing.Size(279, 40);
+            this.GeneralTaskStatistics.TabIndex = 0;
+            // 
             // CompletedPlanTxt
             // 
             this.CompletedPlanTxt.Location = new System.Drawing.Point(254, 127);
@@ -540,29 +568,13 @@ namespace MachineryProcessingDemo.Forms
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // ProductionTaskQueue
+            // pictureBox1
             // 
-            this.ProductionTaskQueue.Location = new System.Drawing.Point(140, 183);
-            this.ProductionTaskQueue.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
-            this.ProductionTaskQueue.Name = "ProductionTaskQueue";
-            this.ProductionTaskQueue.Size = new System.Drawing.Size(353, 37);
-            this.ProductionTaskQueue.TabIndex = 0;
-            // 
-            // CompletedTask
-            // 
-            this.CompletedTask.Location = new System.Drawing.Point(153, 7);
-            this.CompletedTask.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.CompletedTask.Name = "CompletedTask";
-            this.CompletedTask.Size = new System.Drawing.Size(279, 44);
-            this.CompletedTask.TabIndex = 0;
-            // 
-            // GeneralTaskStatistics
-            // 
-            this.GeneralTaskStatistics.Location = new System.Drawing.Point(153, 4);
-            this.GeneralTaskStatistics.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.GeneralTaskStatistics.Name = "GeneralTaskStatistics";
-            this.GeneralTaskStatistics.Size = new System.Drawing.Size(279, 40);
-            this.GeneralTaskStatistics.TabIndex = 0;
+            this.pictureBox1.Location = new System.Drawing.Point(414, 25);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // MainPanel
             // 
@@ -585,11 +597,13 @@ namespace MachineryProcessingDemo.Forms
             this.SecondTitlePanel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.OnlineProductInfoPanel.ResumeLayout(false);
             this.SecondTitlePanel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -640,5 +654,6 @@ namespace MachineryProcessingDemo.Forms
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView2;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
