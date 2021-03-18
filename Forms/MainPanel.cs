@@ -555,6 +555,10 @@ namespace MachineryProcessingDemo.Forms
                 },
                 new DataGridViewColumnEntity()
                 {
+                    DataField = "ProductBornCode", HeadText = "产品出生证", Width = 20, WidthType = SizeType.Percent
+                },
+                new DataGridViewColumnEntity()
+                {
                     DataField = "Reserve2", HeadText = "工序名称", Width = 15, WidthType = SizeType.Percent
                 },
                 new DataGridViewColumnEntity()
