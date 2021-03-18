@@ -8,6 +8,7 @@ namespace MachineryProcessingDemo.helper
 {
     public class GlobalClass
     {
-        public static string Xml = "E:\\ie下载\\2899575553\\FileRecv\\MachineryProcessingDemo"; 
+        // public static string Xml = "E:\\ie下载\\2899575553\\FileRecv\\MachineryProcessingDemo"; 
+        public static string Xml = "E:\\project\\visual Studio Project\\MachineryProcessingDemo"; 
     }
 }

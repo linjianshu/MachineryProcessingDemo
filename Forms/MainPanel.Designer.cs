@@ -129,13 +129,11 @@ namespace MachineryProcessingDemo.Forms
             // 
             // ProductInfo
             // 
-            this.ProductInfo.Image = ((System.Drawing.Image)(resources.GetObject("ProductInfo.Image")));
             this.ProductInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.ProductInfo.Location = new System.Drawing.Point(627, 26);
             this.ProductInfo.Name = "ProductInfo";
             this.ProductInfo.Size = new System.Drawing.Size(65, 49);
             this.ProductInfo.TabIndex = 4;
-            this.ProductInfo.Text = "汪汪";
             this.ProductInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // SecondTitlePanel1
@@ -463,12 +461,12 @@ namespace MachineryProcessingDemo.Forms
             this.ucDataGridView2.HeadTextColor = System.Drawing.Color.Black;
             this.ucDataGridView2.IsShowCheckBox = false;
             this.ucDataGridView2.IsShowHead = true;
-            this.ucDataGridView2.Location = new System.Drawing.Point(11, 209);
+            this.ucDataGridView2.Location = new System.Drawing.Point(4, 209);
             this.ucDataGridView2.Name = "ucDataGridView2";
             this.ucDataGridView2.Padding = new System.Windows.Forms.Padding(0, 40, 0, 0);
             this.ucDataGridView2.RowHeight = 40;
             this.ucDataGridView2.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
-            this.ucDataGridView2.Size = new System.Drawing.Size(583, 220);
+            this.ucDataGridView2.Size = new System.Drawing.Size(602, 220);
             this.ucDataGridView2.TabIndex = 2;
             // 
             // ucDataGridView1

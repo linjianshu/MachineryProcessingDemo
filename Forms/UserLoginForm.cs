@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using HZH_Controls;
 using HZH_Controls.Forms;
 using MachineryProcessingDemo.helper;
+using MachineryProcessingDemo.Properties;
 using Microsoft.Extensions.Configuration;
 
 namespace MachineryProcessingDemo.Forms
@@ -27,6 +33,29 @@ namespace MachineryProcessingDemo.Forms
 
         private void UserLoginForm_Load(object sender, EventArgs e)
         {
+
+            using (var context = new Model())
+            {
+                // FileStream fs = new FileStream("E:\\project\\visual Studio Project\\MachineryProcessingDemo\\Resources\\timi.png", FileMode.Open);
+                // byte[] imgSourse = new byte[fs.Length];
+                // fs.Read(imgSourse, 0, imgSourse.Length);
+                // fs.Close();
+                //
+                // var aProductBase = new A_ProductBase();
+                // var timi = Resources.timi;
+                // var memoryStream = new MemoryStream();
+                // timi.Save(memoryStream,ImageFormat.Png);
+                // var buffer = memoryStream.ToArray();
+                //
+                //
+                // string sql = "update A_ProductBase set Image=@Image where ID=11";
+                // var sqlParameter = new SqlParameter("@Image", buffer);
+                // var executeSqlCommand = context.Database.ExecuteSqlCommand(sql,new []{sqlParameter});
+                //
+                // aProductBase.Image = buffer;
+                // context.A_ProductBase.Add(aProductBase);
+                // context.SaveChanges(); 
+            }
             var addXmlFile = new ConfigurationBuilder().SetBasePath(GlobalClass.Xml)
                 .AddXmlFile("config.xml");
             var configuration = addXmlFile.Build();

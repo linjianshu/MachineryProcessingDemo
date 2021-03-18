@@ -14,7 +14,7 @@ namespace Test.UC
     public partial class UCTestGridTable_CustomCell : UserControl, HZH_Controls.Controls.IDataGridViewCustomCell
     {
         public event HZH_Controls.Controls.DataGridViewRowCustomEventHandler RowCustomEvent;
-        private TestGridModel m_object = null;
+        private APS_ProcedureTaskDetail m_object = null;
         public object DataSource
         {
             get
@@ -29,8 +29,8 @@ namespace Test.UC
 
         public void SetBindSource(object obj)
         {
-            if (obj is TestGridModel)
-                m_object = (TestGridModel)obj;
+            if (obj is APS_ProcedureTaskDetail)
+                m_object = (APS_ProcedureTaskDetail)obj;
         }
 
         private void ucBtnExt1_BtnClick(object sender, EventArgs e)

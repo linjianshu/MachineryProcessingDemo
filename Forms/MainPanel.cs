@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using AutoMapper;
+﻿using AutoMapper;
 using HZH_Controls;
 using HZH_Controls.Controls;
 using HZH_Controls.Forms;
 using MachineryProcessingDemo.helper;
 using Microsoft.Extensions.Configuration;
 using QualityCheckDemo;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace MachineryProcessingDemo.Forms
 {
@@ -63,6 +64,16 @@ namespace MachineryProcessingDemo.Forms
 
         private void MainPanel_Load(object sender, EventArgs e)
         {
+            // using (var context = new Model())
+            // {
+            //     var aProductBase = context.A_ProductBase.FirstOrDefault(s => s.ID == 21);
+            //     var memoryStream = new MemoryStream(aProductBase.Image);
+            //     // memoryStream.Read(aProductBase.Image, 0, aProductBase.Image.Length);
+            //     var fromStream = Image.FromStream(memoryStream, true);
+            //     // this.pictureBox1.Image = fromStream; 
+            //     // aProductBase.Image
+            // }
+
             //var addXmlFile = new ConfigurationBuilder().SetBasePath("E:\\project\\visual Studio Project\\MachineryProcessingDemo")
             var addXmlFile = new ConfigurationBuilder().SetBasePath(GlobalClass.Xml)
                 .AddXmlFile("config.xml");
@@ -161,6 +172,11 @@ namespace MachineryProcessingDemo.Forms
                         control.Text = "产品下线";
                         ProductionStatusInfoPanel.Controls[1].Dispose();
                     }
+
+                    var memoryStream = new MemoryStream(GetProductBase(cProductProcessing.ProductCode).Image);
+                    var fromStream = Image.FromStream(memoryStream);
+                    ProductInfo.Image = fromStream; 
+
                     ProductIDTxt.Text = cProductProcessing.ProductBornCode;
                     ProductIDTxt.ReadOnly = true;
                     ProductNameTxt.Text = cProductProcessing.ProductName;
@@ -184,6 +200,15 @@ namespace MachineryProcessingDemo.Forms
             SelfCheckColorJudge();
 
             timer1.Enabled = true;
+        }
+
+        //传入productcode,获得产品图片
+        private A_ProductBase GetProductBase(string productCode)
+        {
+            using (var context = new Model())
+            {
+                return context.A_ProductBase.FirstOrDefault(s => s.IsAvailable == true && s.ProductCode == productCode); 
+            }
         }
 
         //打开工量具配置界面
@@ -516,10 +541,17 @@ namespace MachineryProcessingDemo.Forms
         {
             //  自定义表格 装载图片等资源
             List<DataGridViewColumnEntity> lstColumns1 = new List<DataGridViewColumnEntity>
-            {
+            { 
                 new DataGridViewColumnEntity()
                 {
-                    DataField = "ProductBornCode", HeadText = "产品出生证", Width = 30, WidthType = SizeType.Percent
+                    Width = 20,
+                    WidthType = SizeType.Percent,
+                    CustomCellType = typeof(UCTestGridTable_CustomCellIcon),
+                    HeadText = "产品图片"
+                },
+                new DataGridViewColumnEntity()
+                {
+                    DataField = "ProductBornCode", HeadText = "产品出生证", Width = 20, WidthType = SizeType.Percent
                 },
                 new DataGridViewColumnEntity()
                 {
@@ -527,11 +559,11 @@ namespace MachineryProcessingDemo.Forms
                 },
                 new DataGridViewColumnEntity()
                 {
-                    DataField = "Reserve3", HeadText = "预计开始时间", Width = 30, WidthType = SizeType.Percent,
+                    DataField = "Reserve3", HeadText = "预计开始时间", Width = 25, WidthType = SizeType.Percent,
                 },
                 new DataGridViewColumnEntity()
                 {
-                    DataField = "Reserve1", HeadText = "工序状态", Width = 25, WidthType = SizeType.Percent
+                    DataField = "Reserve1", HeadText = "工序状态", Width = 20, WidthType = SizeType.Percent
                 }
             };
             ucDataGridView2.Columns = lstColumns1;
@@ -540,8 +572,7 @@ namespace MachineryProcessingDemo.Forms
             //拿到待加工产品排序集合
             var apsProcedureTaskDetails = GetToDoProcedureTask();
             ucDataGridView2.DataSource = apsProcedureTaskDetails;
-            ucDataGridView2.HeadTextColor = Color.DarkOrange; 
-            
+            // ucDataGridView2.HeadTextColor = Color.DarkOrange;
         }
 
         //初始化已完成任务列表
@@ -550,16 +581,16 @@ namespace MachineryProcessingDemo.Forms
             // 自定义表格 装载图片等资源
             List<DataGridViewColumnEntity> lstColumns = new List<DataGridViewColumnEntity>
             {
-                // new DataGridViewColumnEntity()
-                // {
-                //     Width = 10,
-                //     WidthType = SizeType.Percent,
-                //     CustomCellType = typeof(UCTestGridTable_CustomCellIcon),
-                //     HeadText = "产品图片"
-                // },
                 new DataGridViewColumnEntity()
                 {
-                    DataField = "ProductBornCode", HeadText = "产品出生证", Width = 35, WidthType = SizeType.Percent
+                    Width = 20,
+                    WidthType = SizeType.Percent,
+                    CustomCellType = typeof(UCTestGridTable_CustomCellIcon),
+                    HeadText = "产品图片"
+                },
+                new DataGridViewColumnEntity()
+                {
+                    DataField = "ProductBornCode", HeadText = "产品出生证", Width = 25, WidthType = SizeType.Percent
                 },
                 new DataGridViewColumnEntity()
                 {
@@ -567,11 +598,11 @@ namespace MachineryProcessingDemo.Forms
                 },
                 new DataGridViewColumnEntity()
                 {
-                    DataField = "Reserve1", HeadText = "自检结果", Width = 20, WidthType = SizeType.Percent
+                    DataField = "Reserve1", HeadText = "自检结果", Width = 15, WidthType = SizeType.Percent
                 } ,
                 new DataGridViewColumnEntity()
                 {
-                    DataField = "Reserve3", HeadText = "工序状态", Width = 25, WidthType = SizeType.Percent
+                    DataField = "Reserve3", HeadText = "工序状态", Width = 22, WidthType = SizeType.Percent
                 }
             };
 
@@ -719,7 +750,7 @@ namespace MachineryProcessingDemo.Forms
                             {
                                 return;
                             }
-                             if (abortMessage.Equals("y and change"))
+                            if (abortMessage.Equals("y and change"))
                             {
                                 FrmDialog.ShowDialog(this, "当前工序的产品加工中心已修改,请上线其他产品");
                                 return;
@@ -732,7 +763,7 @@ namespace MachineryProcessingDemo.Forms
                                 if (scanOnlineForm.WorkerConfirm())
                                 {
                                     //转档  工序任务明细表=>产品加工过程表
-                                    _cProductProcessing =  scanOnlineForm.ProcessTurnArchives();
+                                    _cProductProcessing = scanOnlineForm.ProcessTurnArchives();
                                     //判断是否抽检
                                     var isChecked = scanOnlineForm.IsChecked();
                                     if (!hasFirstRecord && isChecked)
@@ -799,6 +830,12 @@ namespace MachineryProcessingDemo.Forms
                                     scanOnlineForm.PerfectPlanProductInfo();
                                     //转档  
                                     scanOnlineForm.CntLogicTurn();
+
+                                    var aProductBase = GetProductBase(_cProductProcessing.ProductCode);
+                                    var memoryStream = new MemoryStream(GetProductBase(aProductBase.ProductCode).Image);
+                                    var fromStream = Image.FromStream(memoryStream);
+                                    BeginInvoke(new Action((() => ProductInfo.Image = fromStream))); 
+
                                     FrmDialog.ShowDialog(this, $"产品{ProductIDTxt.Text}上线成功!", "上线成功");
                                     InialToDoTasks();
                                 }
@@ -829,7 +866,7 @@ namespace MachineryProcessingDemo.Forms
                 OnlineTimeTxt.ReadOnly = false;
                 ProductionStatusInfoPanel.Controls.Find("control001", false).First().BackColor =
                     Color.LightSlateGray;
-            }))); 
+            })));
         }
 
         private void DelCntPointProcessing()
@@ -840,7 +877,7 @@ namespace MachineryProcessingDemo.Forms
                     s.ProductBornCode == _cProductProcessing.ProductBornCode &&
                     s.ProcedureCode == _cProductProcessing.ProcedureCode);
                 context.C_BWuE_CntlLogicPro.Remove(cBWuECntlLogicPro);
-                context.SaveChanges(); 
+                context.SaveChanges();
             }
         }
 
@@ -1026,7 +1063,7 @@ namespace MachineryProcessingDemo.Forms
         //产品上线标签点击事件
         private void ProductOnlineEvent(object sender, EventArgs e)
         {
-            panel10.Controls.Find("workerGauge",false).FirstOrDefault()?.Dispose();
+            panel10.Controls.Find("workerGauge", false).FirstOrDefault()?.Dispose();
             var find = panel10.Controls.Find("scanOnlineForm", false);
             if (find.Any())
             {
@@ -1519,7 +1556,7 @@ namespace MachineryProcessingDemo.Forms
 
         private void ServerStateWatch()
         {
-            using (var context  =new Model())
+            using (var context = new Model())
             {
                 var exists = context.Database.Exists();
                 if (!exists)
@@ -1541,12 +1578,12 @@ namespace MachineryProcessingDemo.Forms
 
         private void ResetSignalColor()
         {
-            ucSignalLamp1.LampColor = new[] {Color.Green}; 
+            ucSignalLamp1.LampColor = new[] { Color.Green };
         }
 
         public void changeSignalColor()
         {
-            ucSignalLamp1.LampColor=new []{Color.Red };
+            ucSignalLamp1.LampColor = new[] { Color.Red };
         }
     }
 
