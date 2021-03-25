@@ -7,13 +7,13 @@ namespace MachineryProcessingDemo.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class BuildDatabase : IMigrationMetadata
+    public sealed partial class newdb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(BuildDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(newdb));
         
         string IMigrationMetadata.Id
         {
-            get { return "202103170925436_BuildDatabase"; }
+            get { return "202103261210294_newdb"; }
         }
         
         string IMigrationMetadata.Source

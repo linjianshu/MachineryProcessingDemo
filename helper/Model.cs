@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
+using QualityCheckDemo.POCO;
 
 namespace MachineryProcessingDemo
 {
@@ -162,6 +163,8 @@ namespace MachineryProcessingDemo
         public virtual DbSet<VW_LOT_BIRTHCODE> VW_LOT_BIRTHCODE { get; set; }
         public virtual DbSet<VW_LOT_BIRTHCODE_ASS> VW_LOT_BIRTHCODE_ASS { get; set; }
 
+        public virtual  DbSet<_TripartiteReview> _TripartiteReview { get; set;  }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<C_EquipmentGroupBase>()
@@ -197,10 +200,6 @@ namespace MachineryProcessingDemo
                 .IsUnicode(false);
 
             modelBuilder.Entity<C_EquipmentInfomation>()
-                .Property(e => e.EquipmentCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_EquipmentInfomation>()
                 .Property(e => e.EquipmentGroupCode)
                 .IsUnicode(false);
 
@@ -210,10 +209,6 @@ namespace MachineryProcessingDemo
 
             modelBuilder.Entity<C_EquipmentInfomation>()
                 .Property(e => e.EquipmentCategory)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_EquipmentInfomation>()
-                .Property(e => e.EquipmentType)
                 .IsUnicode(false);
 
             modelBuilder.Entity<C_EquipmentInfomation>()

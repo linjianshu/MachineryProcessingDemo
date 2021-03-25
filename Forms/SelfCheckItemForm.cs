@@ -258,7 +258,9 @@ namespace MachineryProcessingDemo.Forms
                         cProductQualityData.Online_type = _cProductProcessing.Online_type; 
                     }
                     context.SaveChanges();
-                    FrmDialog.ShowDialog(this, "自检项录入成功", "录入成功");
+                    FrmTips.ShowTips(null, "自检项录入成功", 2000, false, ContentAlignment.BottomCenter, null,
+                        TipsSizeMode.Medium, new Size(300, 40), TipsState.Success);
+                    // FrmDialog.ShowDialog(this, "自检项录入成功", "录入成功");
                     ChangeBgColor();
                     Close();
                 }
@@ -310,7 +312,9 @@ namespace MachineryProcessingDemo.Forms
                     }
 
                     context.SaveChanges();
-                    FrmDialog.ShowDialog(this, "自检项录入成功", "录入成功");
+                    FrmTips.ShowTips(null, "自检项录入成功", 2000, false, ContentAlignment.BottomCenter, null,
+                        TipsSizeMode.Medium, new Size(300, 40), TipsState.Success);
+                    // FrmDialog.ShowDialog(this, "自检项录入成功", "录入成功");
                     ChangeBgColor();
                     Close();
                 }

@@ -4,13 +4,13 @@ using HZH_Controls.Controls;
 using HZH_Controls.Forms;
 using MachineryProcessingDemo.helper;
 using Microsoft.Extensions.Configuration;
-using QualityCheckDemo;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MachineryProcessingDemo.Forms
@@ -62,19 +62,18 @@ namespace MachineryProcessingDemo.Forms
             // new Tuple<string, string>("人员信息", "A_fa_address_card_o"),
         };
 
+        private async void ImageAndTextFill()
+        {
+            var pictureBox1 = await LoadEmployeeImage();
+            PersonnelInfoPanel.Controls.Add(pictureBox1);
+
+            //修改自定义控件label.text文本
+            CompletedTask.label1.Text = " 已完成任务";
+            ProductionTaskQueue.label1.Text = "生产任务队列";
+        }
+
         private void MainPanel_Load(object sender, EventArgs e)
         {
-            // using (var context = new Model())
-            // {
-            //     var aProductBase = context.A_ProductBase.FirstOrDefault(s => s.ID == 21);
-            //     var memoryStream = new MemoryStream(aProductBase.Image);
-            //     // memoryStream.Read(aProductBase.Image, 0, aProductBase.Image.Length);
-            //     var fromStream = Image.FromStream(memoryStream, true);
-            //     // this.pictureBox1.Image = fromStream; 
-            //     // aProductBase.Image
-            // }
-
-            //var addXmlFile = new ConfigurationBuilder().SetBasePath("E:\\project\\visual Studio Project\\MachineryProcessingDemo")
             var addXmlFile = new ConfigurationBuilder().SetBasePath(GlobalClass.Xml)
                 .AddXmlFile("config.xml");
             var configuration = addXmlFile.Build();
@@ -85,85 +84,145 @@ namespace MachineryProcessingDemo.Forms
             _equipmentCode = configuration["EquipmentCode"];
             _equipmentName = configuration["EquipmentName"];
 
-            //使用hzh控件自带的图标库 tuple
-            //解析tuple 加载顶部菜单栏 绑定事件
-            var workersGaugeLabel = GenerateLabel();
-            workersGaugeLabel.Click += OpenWorkerGauge;
+            // //使用hzh控件自带的图标库 tuple
+            // //解析tuple 加载顶部菜单栏 绑定事件
+            GenerateLabelAndClick();
+            {    // var workersGaugeLabel = GenerateLabel();
+                 // workersGaugeLabel.Click += OpenWorkerGauge;
+                 //
+                 // var scanGunStateLabel = GenerateLabel();
+                 // scanGunStateLabel.DoubleClick += lbl_DoubleClick;
+                 //
+                 // // var onlineLabel = GenerateLabel();
+                 // // onlineLabel.Click += OpenScanOnlineForm;
+                 //
+                 // var programFilesLabel = GenerateLabel();
+                 // programFilesLabel.Click += OpenProgramFile;
+                 //
+                 // var workInstructionLabel = GenerateLabel();
+                 // workInstructionLabel.Click += OpenWorkInstruction;
+                 //
+                 // // var selfCheckItemInputLabel = GenerateLabel();
+                 // // selfCheckItemInputLabel.Click += OpenSelfCheckItemForm;
+                 //
+                 // // var offlineLabel = GenerateLabel();
+                 // // offlineLabel.Click += OpenScanOfflineForm;
+                 //
+                 // var forceOfflineLabel = GenerateLabel();
+                 // forceOfflineLabel.Click += OpenForceOfflineForm;
+                 //
+                 // var forceOfflineLabel1 = GenerateLabel();
+                 // forceOfflineLabel1.Click += OpenForceOfflineForm;
+                 //
+                 // var switchAccountLabel = GenerateLabel();
+                 // switchAccountLabel.Click += OpenLoginForm;
+                 //
+                 // var exitLabel = GenerateLabel();
+                 // exitLabel.Click += CloseForms;
 
-            var scanGunStateLabel = GenerateLabel();
-            scanGunStateLabel.DoubleClick += lbl_DoubleClick;
-
-            // var onlineLabel = GenerateLabel();
-            // onlineLabel.Click += OpenScanOnlineForm;
-
-            var programFilesLabel = GenerateLabel();
-            programFilesLabel.Click += OpenProgramFile;
-
-            var workInstructionLabel = GenerateLabel();
-            workInstructionLabel.Click += OpenWorkInstruction;
-
-            // var selfCheckItemInputLabel = GenerateLabel();
-            // selfCheckItemInputLabel.Click += OpenSelfCheckItemForm;
-
-            // var offlineLabel = GenerateLabel();
-            // offlineLabel.Click += OpenScanOfflineForm;
-
-            var forceOfflineLabel = GenerateLabel();
-            forceOfflineLabel.Click += OpenForceOfflineForm;
-
-            var forceOfflineLabel1 = GenerateLabel();
-            forceOfflineLabel1.Click += OpenForceOfflineForm;
-
-            var switchAccountLabel = GenerateLabel();
-            switchAccountLabel.Click += OpenLoginForm;
-
-            var exitLabel = GenerateLabel();
-            exitLabel.Click += CloseForms;
-
-            // 加载人员信息图标
-            var tuple1 = new Tuple<string, string>("人员信息", "A_fa_address_card_o");
-            var icon1 = (FontIcons)Enum.Parse(typeof(FontIcons), tuple1.Item2);
-            var pictureBox1 = new PictureBox
-            {
-                AutoSize = false,
-                Size = new Size(240, 160),
-                ForeColor = Color.FromArgb(255, 77, 59),
-                Image = FontImages.GetImage(icon1, 64, Color.FromArgb(255, 77, 59)),
-                Location = new Point(110, 20)
-            };
-            PersonnelInfoPanel.Controls.Add(pictureBox1);
+                // // 加载人员信息图标
+                // var tuple1 = new Tuple<string, string>("人员信息", "A_fa_address_card_o");
+                // var icon1 = (FontIcons)Enum.Parse(typeof(FontIcons), tuple1.Item2);
+                // var pictureBox1 = new PictureBox
+                // {
+                //     AutoSize = false,
+                //     Size = new Size(240, 160),
+                //     ForeColor = Color.FromArgb(255, 77, 59),
+                //     Image = FontImages.GetImage(icon1, 64, Color.FromArgb(255, 77, 59)),
+                //     Location = new Point(110, 20)
+                // };
+                // PersonnelInfoPanel.Controls.Add(pictureBox1);
 
 
-            //修改自定义控件label.text文本
-            CompletedTask.label1.Text = " 已完成任务";
-            ProductionTaskQueue.label1.Text = "生产任务队列";
+                // //修改自定义控件label.text文本
+                // CompletedTask.label1.Text = " 已完成任务";
+                // ProductionTaskQueue.label1.Text = "生产任务队列";
+            }
+            ImageAndTextFill();
 
             InitialDidTasks();
 
             ucSignalLamp1.LampColor = new Color[] { Color.Green };
-            ucSignalLamp2.LampColor = new Color[] { Color.Red };
+            ucSignalLamp2.LampColor = new Color[] { Color.Green };
 
-            InialToDoTasks();
+            InitialToDoTasks();
 
             DrawLabel();
+            {//读取配置文件里的数据库连接字符串
+             // var builder = new ConfigurationBuilder().SetBasePath("E:\\project\\visual Studio Project\\MachineryProcessingDemo").AddJsonFile("Setting.json");
+             // var configuration = builder.Build();
+             // var configurationSection = configuration.GetSection("_EquipmentID");
+             // var s1 = configurationSection["key1"];
 
-            //读取配置文件里的数据库连接字符串
-            // var builder = new ConfigurationBuilder().SetBasePath("E:\\project\\visual Studio Project\\MachineryProcessingDemo").AddJsonFile("Setting.json");
-            // var configuration = builder.Build();
-            // var configurationSection = configuration.GetSection("_EquipmentID");
-            // var s1 = configurationSection["key1"];
+                // //获取当前加工中心的生产任务(已上线)
+                // using (var context = new Model())
+                // {
+                //     var cProductProcessing = context.C_ProductProcessing
+                //         .FirstOrDefault(s => s.WorkshopCode == _workshopCode && s.OnlineTime != null);
+                //     if (cProductProcessing != null)
+                //     {
+                //         var apsProcedureTaskDetail = context.APS_ProcedureTaskDetail.FirstOrDefault(s =>
+                //             s.ProductBornCode == cProductProcessing.ProductBornCode && s.IsAvailable == true);
+                //
+                //         if (apsProcedureTaskDetail != null && apsProcedureTaskDetail.ProcedureType == (decimal?)ProcedureType.Tooling)
+                //         {
+                //             ProductionStatusInfoPanel.Controls.Find("control003", false).First().Hide();
+                //             var control = ProductionStatusInfoPanel.Controls.Find("control002", false).First();
+                //             control.Click -= SelfCheckItemEvent;
+                //             control.Click += ProductOfflineEvent;
+                //             control.Text = "产品下线";
+                //             ProductionStatusInfoPanel.Controls[1].Dispose();
+                //         }
+                //
+                //         var memoryStream = new MemoryStream(GetProductBase(cProductProcessing.ProductCode).Image);
+                //         var fromStream = Image.FromStream(memoryStream);
+                //         ProductInfo.Image = fromStream;
+                //
+                //         ProductIDTxt.Text = cProductProcessing.ProductBornCode;
+                //         ProductIDTxt.ReadOnly = true;
+                //         ProductNameTxt.Text = cProductProcessing.ProductName;
+                //         ProductNameTxt.ReadOnly = true;
+                //         CurrentProcessTxt.Text = cProductProcessing.ProcedureName;
+                //         CurrentProcessTxt.ReadOnly = true;
+                //         OnlineTimeTxt.Text = cProductProcessing.OnlineTime.ToString();
+                //         OnlineTimeTxt.ReadOnly = true;
+                //         ProductionStatusInfoPanel.Controls.Find("control001", false).First().BackColor =
+                //             Color.MediumSeaGreen;
+                //     }
+                //
+                //     if (!string.IsNullOrEmpty(ProductIDTxt.Text))
+                //     {
+                //         //在产品加工过程表中根据产品出生证  获取元数据
+                //         _cProductProcessing = context.C_ProductProcessing.FirstOrDefault(s => s.ProductBornCode == ProductIDTxt.Text.Trim());
+                //     }
+                // }
+            }
+
+            //获取当前加工中心的生产任务(已上线)
+            TryGetCurrentOnlineTask();
+
+            //初始化判断自检项完成与否
+            SelfCheckColorJudge();
+
+            timer1.Enabled = true;
+        }
+
+        private async void TryGetCurrentOnlineTask()
+        {
 
             //获取当前加工中心的生产任务(已上线)
             using (var context = new Model())
             {
                 var cProductProcessing = context.C_ProductProcessing
-                    .FirstOrDefault(s => s.WorkshopCode == _workshopCode && s.OnlineTime != null);
+                    .FirstOrDefault(s => s.WorkshopCode == _workshopCode && s.OnlineTime != null
+                    &&s.EquipmentCode==_equipmentCode&&s.EquipmentCode.ToString()==_equipmentCode);
                 if (cProductProcessing != null)
                 {
                     var apsProcedureTaskDetail = context.APS_ProcedureTaskDetail.FirstOrDefault(s =>
                         s.ProductBornCode == cProductProcessing.ProductBornCode && s.IsAvailable == true);
 
-                    if (apsProcedureTaskDetail != null && apsProcedureTaskDetail.ProcedureType == (decimal?)ProcedureType.Tooling)
+                    if (apsProcedureTaskDetail != null &&
+                        apsProcedureTaskDetail.ProcedureType == (decimal?)ProcedureType.Tooling)
                     {
                         ProductionStatusInfoPanel.Controls.Find("control003", false).First().Hide();
                         var control = ProductionStatusInfoPanel.Controls.Find("control002", false).First();
@@ -177,6 +236,8 @@ namespace MachineryProcessingDemo.Forms
                     var fromStream = Image.FromStream(memoryStream);
                     ProductInfo.Image = fromStream;
 
+                    // BeginInvoke(new Action((() =>
+                    // {
                     ProductIDTxt.Text = cProductProcessing.ProductBornCode;
                     ProductIDTxt.ReadOnly = true;
                     ProductNameTxt.Text = cProductProcessing.ProductName;
@@ -187,19 +248,137 @@ namespace MachineryProcessingDemo.Forms
                     OnlineTimeTxt.ReadOnly = true;
                     ProductionStatusInfoPanel.Controls.Find("control001", false).First().BackColor =
                         Color.MediumSeaGreen;
+                    // })));
+
                 }
 
                 if (!string.IsNullOrEmpty(ProductIDTxt.Text))
                 {
                     //在产品加工过程表中根据产品出生证  获取元数据
-                    _cProductProcessing = context.C_ProductProcessing.FirstOrDefault(s => s.ProductBornCode == ProductIDTxt.Text.Trim());
+                    _cProductProcessing =
+                        context.C_ProductProcessing.FirstOrDefault(s =>
+                            s.ProductBornCode == ProductIDTxt.Text.Trim());
                 }
             }
 
-            //初始化判断自检项完成与否
-            SelfCheckColorJudge();
+            // await Task.Run((() =>
+            // {
+            //     //获取当前加工中心的生产任务(已上线)
+            //     using (var context = new Model())
+            //     {
+            //         var cProductProcessing = context.C_ProductProcessing
+            //             .FirstOrDefault(s => s.WorkshopCode == _workshopCode && s.OnlineTime != null);
+            //         if (cProductProcessing != null)
+            //         {
+            //             var apsProcedureTaskDetail = context.APS_ProcedureTaskDetail.FirstOrDefault(s =>
+            //                 s.ProductBornCode == cProductProcessing.ProductBornCode && s.IsAvailable == true);
+            //
+            //             if (apsProcedureTaskDetail != null &&
+            //                 apsProcedureTaskDetail.ProcedureType == (decimal?)ProcedureType.Tooling)
+            //             {
+            //                 ProductionStatusInfoPanel.Controls.Find("control003", false).First().Hide();
+            //                 var control = ProductionStatusInfoPanel.Controls.Find("control002", false).First();
+            //                 control.Click -= SelfCheckItemEvent;
+            //                 control.Click += ProductOfflineEvent;
+            //                 control.Text = "产品下线";
+            //                 ProductionStatusInfoPanel.Controls[1].Dispose();
+            //             }
+            //
+            //             var memoryStream = new MemoryStream(GetProductBase(cProductProcessing.ProductCode).Image);
+            //             var fromStream = Image.FromStream(memoryStream);
+            //             ProductInfo.Image = fromStream;
+            //
+            //             // BeginInvoke(new Action((() =>
+            //             // {
+            //                 ProductIDTxt.Text = cProductProcessing.ProductBornCode;
+            //                 ProductIDTxt.ReadOnly = true;
+            //                 ProductNameTxt.Text = cProductProcessing.ProductName;
+            //                 ProductNameTxt.ReadOnly = true;
+            //                 CurrentProcessTxt.Text = cProductProcessing.ProcedureName;
+            //                 CurrentProcessTxt.ReadOnly = true;
+            //                 OnlineTimeTxt.Text = cProductProcessing.OnlineTime.ToString();
+            //                 OnlineTimeTxt.ReadOnly = true;
+            //                 ProductionStatusInfoPanel.Controls.Find("control001", false).First().BackColor =
+            //                     Color.MediumSeaGreen;
+            //             // })));
+            //
+            //         }
+            //
+            //         if (!string.IsNullOrEmpty(ProductIDTxt.Text))
+            //         {
+            //             //在产品加工过程表中根据产品出生证  获取元数据
+            //             _cProductProcessing =
+            //                 context.C_ProductProcessing.FirstOrDefault(s =>
+            //                     s.ProductBornCode == ProductIDTxt.Text.Trim());
+            //         }
+            //     }
+            // }));
+        }
 
-            timer1.Enabled = true;
+        private async Task<PictureBox> LoadEmployeeImage()
+        {
+            return await Task.Run(new Func<PictureBox>(() =>
+           {
+               // 加载人员信息图标
+               var tuple1 = new Tuple<string, string>("人员信息", "A_fa_address_card_o");
+               var icon1 = (FontIcons)Enum.Parse(typeof(FontIcons), tuple1.Item2);
+               var pictureBox1 = new PictureBox
+               {
+                   AutoSize = false,
+                   Size = new Size(240, 160),
+                   ForeColor = Color.FromArgb(255, 77, 59),
+                   Image = FontImages.GetImage(icon1, 64, Color.FromArgb(255, 77, 59)),
+                   Location = new Point(110, 20)
+               };
+               return pictureBox1;
+           }));
+
+        }
+
+        private async void GenerateLabelAndClick()
+        {
+            //使用hzh控件自带的图标库 tuple
+            //解析tuple 加载顶部菜单栏 绑定事件
+            var workersGaugeLabel = await GenerateLabel();
+            FirstTitlePanel.Controls.Add(workersGaugeLabel);
+            workersGaugeLabel.Click += OpenWorkerGauge;
+
+            var scanGunStateLabel = await GenerateLabel();
+            FirstTitlePanel.Controls.Add(scanGunStateLabel);
+            scanGunStateLabel.DoubleClick += lbl_DoubleClick;
+
+            // var onlineLabel = GenerateLabel();
+            // onlineLabel.Click += OpenScanOnlineForm;
+
+            var programFilesLabel = await GenerateLabel();
+            FirstTitlePanel.Controls.Add(programFilesLabel);
+            programFilesLabel.Click += OpenProgramFile;
+
+            var workInstructionLabel = await GenerateLabel();
+            FirstTitlePanel.Controls.Add(workInstructionLabel);
+            workInstructionLabel.Click += OpenWorkInstruction;
+
+            // var selfCheckItemInputLabel = GenerateLabel();
+            // selfCheckItemInputLabel.Click += OpenSelfCheckItemForm;
+
+            // var offlineLabel = GenerateLabel();
+            // offlineLabel.Click += OpenScanOfflineForm;
+
+            var forceOfflineLabel = await GenerateLabel();
+            FirstTitlePanel.Controls.Add(forceOfflineLabel);
+            forceOfflineLabel.Click += OpenForceOfflineForm;
+
+            var forceOfflineLabel1 = await GenerateLabel();
+            FirstTitlePanel.Controls.Add(forceOfflineLabel1);
+            forceOfflineLabel1.Click += OpenForceOfflineForm;
+
+            var switchAccountLabel = await GenerateLabel();
+            FirstTitlePanel.Controls.Add(switchAccountLabel);
+            switchAccountLabel.Click += OpenLoginForm;
+
+            var exitLabel = await GenerateLabel();
+            FirstTitlePanel.Controls.Add(exitLabel);
+            exitLabel.Click += CloseForms;
         }
 
         //传入productcode,获得产品图片
@@ -293,7 +472,7 @@ namespace MachineryProcessingDemo.Forms
                 }
             }
         }
-
+        //打开强制下机界面
         private void OpenForceOfflineForm(object sender, EventArgs e)
         {
             panel10.Controls.Clear();
@@ -338,7 +517,11 @@ namespace MachineryProcessingDemo.Forms
 
                 ProductionStatusInfoPanel.Controls.Find("control003", false).First().BackColor =
                     Color.OrangeRed;
-                InialToDoTasks();
+
+                FrmTips.ShowTips(null, "强制下线成功!", 2000, false, ContentAlignment.BottomCenter, null,
+                    TipsSizeMode.Medium, new Size(300, 50), TipsState.Success);
+
+                InitialToDoTasks();
                 InitialDidTasks();
             }
         }
@@ -361,6 +544,7 @@ namespace MachineryProcessingDemo.Forms
                 }
             }
         }
+
         //如果是整个生产环节的末道工序的话,就要转到产品档案表中
         private void GenerateProductDoc()
         {
@@ -538,8 +722,7 @@ namespace MachineryProcessingDemo.Forms
             }
         }
         //初始化未完成任务列表
-
-        public void InialToDoTasks()
+        private async void InitialToDoTasks()
         {
             //  自定义表格 装载图片等资源
             List<DataGridViewColumnEntity> lstColumns1 = new List<DataGridViewColumnEntity>
@@ -550,10 +733,6 @@ namespace MachineryProcessingDemo.Forms
                     WidthType = SizeType.Percent,
                     CustomCellType = typeof(UCTestGridTable_CustomCellIcon),
                     HeadText = "产品图片"
-                },
-                new DataGridViewColumnEntity()
-                {
-                    DataField = "ProductBornCode", HeadText = "产品出生证", Width = 20, WidthType = SizeType.Percent
                 },
                 new DataGridViewColumnEntity()
                 {
@@ -576,13 +755,13 @@ namespace MachineryProcessingDemo.Forms
             ucDataGridView2.ItemClick += UcDataGridView2_ItemClick;
 
             //拿到待加工产品排序集合
-            var apsProcedureTaskDetails = GetToDoProcedureTask();
+            var apsProcedureTaskDetails = await GetToDoProcedureTaskAsync();
             ucDataGridView2.DataSource = apsProcedureTaskDetails;
             // ucDataGridView2.HeadTextColor = Color.DarkOrange;
         }
 
         //初始化已完成任务列表
-        private void InitialDidTasks()
+        private async void InitialDidTasks()
         {
             // 自定义表格 装载图片等资源
             List<DataGridViewColumnEntity> lstColumns = new List<DataGridViewColumnEntity>
@@ -612,16 +791,11 @@ namespace MachineryProcessingDemo.Forms
                 }
             };
 
-            var didProcedureTask = GetDidProcedureTask();
-            // lstCulumns.Add(new DataGridViewColumnEntity() { DataField = "Age", HeadText = "年龄", Width = 50, WidthType = SizeType.Percent });
-            // lstCulumns.Add(new DataGridViewColumnEntity() { DataField = "Birthday", HeadText = "生日", Width = 50, WidthType = SizeType.Percent, Format = (a) => { return ((DateTime)a).ToString("yyyy-MM-dd"); } });
-            // lstCulumns.Add(new DataGridViewColumnEntity() { DataField = "Sex", HeadText = "性别", Width = 50, WidthType = SizeType.Percent, Format = (a) => { return ((int)a) == 0 ? "女" : "男"; } });
-            // lstColumns.Add(new DataGridViewColumnEntity() { Width = 155, WidthType = SizeType.Absolute, CustomCellType = typeof(UCTestGridTable_CustomCell) });
+            var didProcedureTask = await GetDidProcedureTaskAsync();
             ucDataGridView1.Columns = lstColumns;
-            // this.ucDataGridView1.IsShowCheckBox = true;
-
             ucDataGridView1.DataSource = didProcedureTask;
         }
+
 
         //单击事件 产品上线
         private void UcDataGridView2_ItemClick(object sender, DataGridViewEventArgs e)
@@ -704,8 +878,13 @@ namespace MachineryProcessingDemo.Forms
                                     scanOnlineForm.PerfectPlanProductInfo();
                                     //转档  
                                     scanOnlineForm.CntLogicTurn();
-                                    FrmDialog.ShowDialog(this, $"产品{ProductIDTxt.Text}上线成功!", "上线成功");
-                                    InialToDoTasks();
+
+
+
+                                    FrmTips.ShowTips(null, $"产品{ProductIDTxt.Text}上线成功!", 2000, false, ContentAlignment.BottomCenter, null,
+                                        TipsSizeMode.Medium, new Size(300, 50), TipsState.Success);
+                                    // FrmDialog.ShowDialog(this, $"产品{ProductIDTxt.Text}上线成功!", "上线成功");
+                                    InitialToDoTasks();
                                 }
                             }
                         }
@@ -852,8 +1031,10 @@ namespace MachineryProcessingDemo.Forms
                                     var fromStream = Image.FromStream(memoryStream);
                                     BeginInvoke(new Action((() => ProductInfo.Image = fromStream)));
 
-                                    FrmDialog.ShowDialog(this, $"产品{ProductIDTxt.Text}上线成功!", "上线成功");
-                                    InialToDoTasks();
+                                    FrmTips.ShowTips(null, $"产品{ProductIDTxt.Text}上线成功!", 2000, false, ContentAlignment.BottomCenter, null,
+                                        TipsSizeMode.Medium, new Size(300, 50), TipsState.Success);
+                                    // FrmDialog.ShowDialog(this, $"产品{ProductIDTxt.Text}上线成功!", "上线成功");
+                                    InitialToDoTasks();
                                 }
                             }
                         }
@@ -906,28 +1087,127 @@ namespace MachineryProcessingDemo.Forms
             }
         }
 
+
+        private async Task<List<APS_ProcedureTaskDetail>> GetDidProcedureTaskAsync()
+        {
+            return await Task.Run(new Func<List<APS_ProcedureTaskDetail>>(() =>
+            {
+                var procedureTaskDetails = new List<APS_ProcedureTaskDetail>();
+                using (var context = new Model())
+                {
+                    // //在工序任务表中根据设备编号和 开始时间排序得到优先级最高的工序任务
+                    // var apsProcedureTasks = context.APS_ProcedureTask
+                    //     .Where(s => s.EquipmentCode.ToString() == _equipmentId && s.IsAvailable == true)
+                    //     .OrderBy(s => s).ToList();
+                    //
+                    // foreach (var apsProcedureTask in apsProcedureTasks)
+                    {
+                        //新添加的
+                        var apsProcedureTaskDetails = context.APS_ProcedureTaskDetail.Where(s =>
+                                s.EquipmentCode.ToString() == _equipmentCode
+                                // && s.IsAvailable == true
+                                && s.TaskState == (decimal?)ApsProcedureTaskDetailState.Completed&&s.ProcedureType!=(decimal?) ProcedureType.HotPressing
+                                &&s.ProcedureType!=(decimal?) ProcedureType.Bench&&s.ProcedureType!=(decimal?) ProcedureType.Outsourcing)
+                            .OrderBy(s => s.LastModifiedTime).ToList();
+
+                        // //在工序明细表中 根据tasktableid/设备号/工序号/有效性/任务状态 获取已完成的任务集合(排序)
+                        // var apsProcedureTaskDetails = context.APS_ProcedureTaskDetail.Where(s =>
+                        //     s.EquipmentID == apsProcedureTask.EquipmentID &&
+                        //     s.ProcedureCode == apsProcedureTask.ProcedureCode && s.IsAvailable == true &&
+                        //     s.TaskTableID == apsProcedureTask.ID &&
+                        //     s.TaskState == (decimal?)ApsProcedureTaskDetailState.Completed)
+                        //     .OrderBy(s => s.LastModifiedTime);
+
+                        foreach (var apsProcedureTaskDetail in apsProcedureTaskDetails)
+                        {
+                            //新添加的
+                            var apsProcedureTask = context.APS_ProcedureTask.FirstOrDefault(s =>
+                                s.ID == apsProcedureTaskDetail.TaskTableID && s.IsAvailable == true &&
+                                s.ProcedureType != (decimal?) ProcedureType.HotPressing &&
+                                s.ProcedureType != (decimal?) ProcedureType.Bench &&
+                                s.ProcedureType != (decimal?) ProcedureType.Outsourcing);
+
+                            //令apsdetail的reserve2 字段作为工序名称来搞
+                            //在产品工序基础表中根据产品号/有效性  获得工序名称
+                            apsProcedureTaskDetail.Reserve2 = context.A_ProductProcedureBase.Where(s =>
+                                    s.IsAvailable == true && s.ProductID == apsProcedureTask.ProductID &&
+                                    s.PlanCode == apsProcedureTask.PlanCode &&
+                                    s.ProcedureCode == apsProcedureTaskDetail.ProcedureCode).Select(s => s.ProcedureName)
+                                .FirstOrDefault();
+
+                            var cProductProcessingDocument = context.C_ProductProcessingDocument.FirstOrDefault(s =>
+                                s.ProductBornCode == apsProcedureTaskDetail.ProductBornCode &&
+                                s.ProcedureCode == apsProcedureTaskDetail.ProcedureCode);
+
+                            apsProcedureTaskDetail.Reserve1 =
+                                cProductProcessingDocument.Offline_type == (decimal?)ProductProcessingOfflineType.Normal
+                                    ? "正常下机" : cProductProcessingDocument.Offline_type == (decimal?)ProductProcessingOfflineType.Force
+                                        ? "强制下机" : "不良下机";
+
+                            if (apsProcedureTaskDetail.IsInspect == 1)
+                            {
+                                //获得三坐标检验任务
+                                var cCheckTask = context.C_CheckTask.FirstOrDefault(s =>
+                                    s.ProductBornCode == apsProcedureTaskDetail.ProductBornCode &&
+                                    s.ProcedureCode == apsProcedureTaskDetail.ProcedureCode && s.IsAvailable == true && s.ApsDetailID == apsProcedureTaskDetail.ID);
+                                if (cCheckTask == null)
+                                {
+                                    apsProcedureTaskDetail.Reserve3 = "加工完毕";
+                                    continue;
+                                }
+                                apsProcedureTaskDetail.Reserve3 =
+                                    cCheckTask.TaskState == (decimal?)CheckTaskState.NotOnline ? "待送检(三坐标)" :
+                                    cCheckTask.TaskState == (decimal?)CheckTaskState.InExecution ? "正在送检(三坐标)" :
+                                    apsProcedureTaskDetail.IsAvailable == false ? "送检完毕(返修)" : "送检完毕(三坐标)";
+
+                            }
+                            else
+                            {
+                                apsProcedureTaskDetail.Reserve3 = "加工完毕";
+                            }
+                        }
+                        procedureTaskDetails.AddRange(apsProcedureTaskDetails);
+                    }
+                }
+                return procedureTaskDetails;
+            }));
+        }
+
         private List<APS_ProcedureTaskDetail> GetDidProcedureTask()
         {
             var procedureTaskDetails = new List<APS_ProcedureTaskDetail>();
             using (var context = new Model())
             {
-                //在工序任务表中根据设备编号和 开始时间排序得到优先级最高的工序任务
-                var apsProcedureTasks = context.APS_ProcedureTask
-                    .Where(s => s.EquipmentID.ToString() == _equipmentId && s.IsAvailable == true)
-                    .OrderBy(s => s.StartTime).ToList();
-
-                foreach (var apsProcedureTask in apsProcedureTasks)
+                // //在工序任务表中根据设备编号和 开始时间排序得到优先级最高的工序任务
+                // var apsProcedureTasks = context.APS_ProcedureTask
+                //     .Where(s => s.EquipmentID.ToString() == _equipmentId && s.IsAvailable == true)
+                //     .OrderBy(s => s.StartTime).ToList();
+                //
+                // foreach (var apsProcedureTask in apsProcedureTasks)
                 {
-                    //在工序明细表中 根据tasktableid/设备号/工序号/有效性/任务状态 获取已完成的任务集合(排序)
+                    //新添加的
                     var apsProcedureTaskDetails = context.APS_ProcedureTaskDetail.Where(s =>
-                        s.EquipmentID == apsProcedureTask.EquipmentID &&
-                        s.ProcedureCode == apsProcedureTask.ProcedureCode && s.IsAvailable == true &&
-                        s.TaskTableID == apsProcedureTask.ID &&
-                        s.TaskState == (decimal?)ApsProcedureTaskDetailState.Completed)
-                        .OrderBy(s => s.LastModifiedTime);
+                            s.EquipmentCode.ToString() == _equipmentCode
+                            // && s.IsAvailable == true 
+                            && s.TaskState == (decimal?)ApsProcedureTaskDetailState.Completed&& s.ProcedureType != (decimal?)ProcedureType.HotPressing
+                            && s.ProcedureType != (decimal?)ProcedureType.Bench && s.ProcedureType != (decimal?)ProcedureType.Outsourcing)
+                        .OrderBy(s => s.LastModifiedTime).ToList();
+
+                    // //在工序明细表中 根据tasktableid/设备号/工序号/有效性/任务状态 获取已完成的任务集合(排序)
+                    // var apsProcedureTaskDetails = context.APS_ProcedureTaskDetail.Where(s =>
+                    //     s.EquipmentID == apsProcedureTask.EquipmentID &&
+                    //     s.ProcedureCode == apsProcedureTask.ProcedureCode && s.IsAvailable == true &&
+                    //     s.TaskTableID == apsProcedureTask.ID &&
+                    //     s.TaskState == (decimal?)ApsProcedureTaskDetailState.Completed)
+                    //     .OrderBy(s => s.LastModifiedTime);
 
                     foreach (var apsProcedureTaskDetail in apsProcedureTaskDetails)
                     {
+                        //新添加的
+                        var apsProcedureTask = context.APS_ProcedureTask.FirstOrDefault(s => s.ID == apsProcedureTaskDetail.TaskTableID && s.IsAvailable == true
+                                                                                                                                        && s.ProcedureType != (decimal?)ProcedureType.HotPressing
+                                                                                                                                        && s.ProcedureType != (decimal?)ProcedureType.Bench && s.ProcedureType != (decimal?)ProcedureType.Outsourcing);
+
                         //令apsdetail的reserve2 字段作为工序名称来搞
                         //在产品工序基础表中根据产品号/有效性  获得工序名称
                         apsProcedureTaskDetail.Reserve2 = context.A_ProductProcedureBase.Where(s =>
@@ -950,7 +1230,7 @@ namespace MachineryProcessingDemo.Forms
                             //获得三坐标检验任务
                             var cCheckTask = context.C_CheckTask.FirstOrDefault(s =>
                                 s.ProductBornCode == apsProcedureTaskDetail.ProductBornCode &&
-                                s.ProcedureCode == apsProcedureTaskDetail.ProcedureCode && s.IsAvailable == true&&s.ApsDetailID==apsProcedureTaskDetail.ID);
+                                s.ProcedureCode == apsProcedureTaskDetail.ProcedureCode && s.IsAvailable == true && s.ApsDetailID == apsProcedureTaskDetail.ID);
                             if (cCheckTask == null)
                             {
                                 apsProcedureTaskDetail.Reserve3 = "加工完毕";
@@ -959,7 +1239,8 @@ namespace MachineryProcessingDemo.Forms
                             apsProcedureTaskDetail.Reserve3 =
                                 cCheckTask.TaskState == (decimal?)CheckTaskState.NotOnline ? "待送检(三坐标)" :
                                 cCheckTask.TaskState == (decimal?)CheckTaskState.InExecution ? "正在送检(三坐标)" :
-                                "送检完毕(三坐标)";
+                                apsProcedureTaskDetail.IsAvailable == false ? "送检完毕(返修)" : "送检完毕(三坐标)";
+                            // "送检完毕(三坐标)";
                         }
                         else
                         {
@@ -972,6 +1253,85 @@ namespace MachineryProcessingDemo.Forms
             return procedureTaskDetails;
         }
 
+        private async Task<List<APS_ProcedureTaskDetail>> GetToDoProcedureTaskAsync()
+        {
+            return await Task.Run(new Func<List<APS_ProcedureTaskDetail>>(() =>
+            {
+                var procedureTaskDetails = new List<APS_ProcedureTaskDetail>();
+                using (var context = new Model())
+                {
+                    //在工序任务表中根据设备编号和任务状态和 开始时间排序得到优先级最高的工序任务
+                    var apsProcedureTasks = context.APS_ProcedureTask
+                        .Where(s => s.EquipmentCode == _equipmentCode &&
+                                    s.TaskState != (decimal?)ApsProcedureTaskState.WaitPublish && s.TaskState != (decimal?)ApsProcedureTaskState.Completed
+                                    && s.ProcedureType != (decimal?)ProcedureType.HotPressing
+                                    &&s.ProcedureType != (decimal?) ProcedureType.Bench
+                                    &&s.ProcedureType!= (decimal?) ProcedureType.Outsourcing
+                                    && s.IsAvailable == true)
+                        .OrderByDescending(s => s.TaskState).ThenBy(s => s.StartTime).ToList();
+                    foreach (var apsProcedureTask in apsProcedureTasks)
+                    {
+                        //在工序任务明细表中 根据tasktableid/设备号/工序号/有效性/任务状态 获取待完成的任务集合(排序)
+                        var apsProcedureTaskDetails = context.APS_ProcedureTaskDetail.Where(s =>
+                                s.EquipmentID == apsProcedureTask.EquipmentID &&
+                                s.ProcedureCode == apsProcedureTask.ProcedureCode && s.TaskState != (decimal?)ApsProcedureTaskDetailState.Completed &&
+                                s.IsAvailable == true && s.TaskTableID == apsProcedureTask.ID
+                                && s.ProcedureType == (decimal?)ProcedureType.Machining).OrderByDescending(s => s.TaskState)
+                            .ToList();
+
+                        foreach (var apsProcedureTaskDetail in apsProcedureTaskDetails)
+                        {
+                            //reserve3 作为转换后的日期格式显示
+                            if (apsProcedureTaskDetail.CreateTime != null)
+                                apsProcedureTaskDetail.Reserve3 = apsProcedureTaskDetail.CreateTime.Value.ToString("g");
+
+                            //令apsdetail的reserve2 字段作为工序名称来搞
+                            //在产品工序基础表中根据产品号/有效性  获得工序名称
+                            apsProcedureTaskDetail.Reserve2 = context.A_ProductProcedureBase.Where(s =>
+                                    s.IsAvailable == true && s.ProductID == apsProcedureTask.ProductID &&
+                                    s.PlanCode == apsProcedureTask.PlanCode &&
+                                    s.ProcedureCode == apsProcedureTaskDetail.ProcedureCode).Select(s => s.ProcedureName)
+                                .FirstOrDefault();
+
+                            //判断当前产品当前工序的状态 待加工/正在加工/加工完毕/待送检(三坐标/手检)/正在送检(三坐标/手检)/送检完毕(三坐标/手检)
+                            if (apsProcedureTaskDetail.TaskState == (decimal?)ApsProcedureTaskDetailState.NotOnline)
+                            {
+                                apsProcedureTaskDetail.Reserve1 = "待加工";
+                            }
+                            else if (apsProcedureTaskDetail.TaskState ==
+                                     (decimal?)ApsProcedureTaskDetailState.InExecution)
+                            {
+                                apsProcedureTaskDetail.Reserve1 = "正在加工";
+                            }
+                            else if (apsProcedureTaskDetail.TaskState == (decimal?)ApsProcedureTaskDetailState.Repair)
+                            {
+                                apsProcedureTaskDetail.Reserve1 = "待返修";
+                            }
+                            else if (apsProcedureTaskDetail.TaskState == (decimal?)ApsProcedureTaskDetailState.Completed)
+                            {
+                                if (apsProcedureTaskDetail.IsInspect != 1)
+                                {
+                                    apsProcedureTaskDetail.Reserve1 = "加工完毕";
+                                }
+                                else
+                                {
+                                    //获得三坐标检验任务
+                                    var cCheckTask = context.C_CheckTask.FirstOrDefault(s =>
+                                        s.ProductBornCode == apsProcedureTaskDetail.ProductBornCode &&
+                                        s.ProcedureCode == apsProcedureTaskDetail.ProcedureCode && s.IsAvailable == true);
+                                    apsProcedureTaskDetail.Reserve1 =
+                                        cCheckTask.TaskState == (decimal?)CheckTaskState.NotOnline ? "待送检(三坐标)" :
+                                        cCheckTask.TaskState == (decimal?)CheckTaskState.InExecution ? "正在送检(三坐标)" :
+                                        "送检完毕(三坐标)";
+                                }
+                            }
+                        }
+                        procedureTaskDetails.AddRange(apsProcedureTaskDetails);
+                    }
+                }
+                return procedureTaskDetails;
+            }));
+        }
         private List<APS_ProcedureTaskDetail> GetToDoProcedureTask()
         {
             var procedureTaskDetails = new List<APS_ProcedureTaskDetail>();
@@ -979,10 +1339,13 @@ namespace MachineryProcessingDemo.Forms
             {
                 //在工序任务表中根据设备编号和任务状态和 开始时间排序得到优先级最高的工序任务
                 var apsProcedureTasks = context.APS_ProcedureTask
-                    .Where(s => s.EquipmentID.ToString() == _equipmentId &&
+                    .Where(s => s.EquipmentCode == _equipmentCode 
+                                        && s.ProcedureType != (decimal?)ProcedureType.HotPressing
+                                        && s.ProcedureType != (decimal?)ProcedureType.Bench
+                                        && s.ProcedureType != (decimal?)ProcedureType.Outsourcing&&
                                 s.TaskState != (decimal?)ApsProcedureTaskState.WaitPublish && s.TaskState != (decimal?)ApsProcedureTaskState.Completed
                                 && s.IsAvailable == true)
-                    .OrderBy(s => s.StartTime).ToList();
+                    .OrderByDescending(s => s.TaskState).ThenBy(s => s.StartTime).ToList();
                 foreach (var apsProcedureTask in apsProcedureTasks)
                 {
                     //在工序任务明细表中 根据tasktableid/设备号/工序号/有效性/任务状态 获取待完成的任务集合(排序)
@@ -1018,7 +1381,7 @@ namespace MachineryProcessingDemo.Forms
                         }
                         else if (apsProcedureTaskDetail.TaskState == (decimal?)ApsProcedureTaskDetailState.Repair)
                         {
-                            apsProcedureTaskDetail.Reserve1 = "待返修"; 
+                            apsProcedureTaskDetail.Reserve1 = "待返修";
                         }
                         else if (apsProcedureTaskDetail.TaskState == (decimal?)ApsProcedureTaskDetailState.Completed)
                         {
@@ -1045,25 +1408,33 @@ namespace MachineryProcessingDemo.Forms
             return procedureTaskDetails;
         }
         //自检项是否已完成
-        private void SelfCheckColorJudge()
+        private async void SelfCheckColorJudge()
         {
-            using (var context = new Model())
+            await Task.Run((() =>
             {
-                //在产品加工过程表中根据产品出生证  获取元数据
-                _cProductProcessing = context.C_ProductProcessing.FirstOrDefault(s => s.ProductBornCode == ProductIDTxt.Text.Trim());
-                if (_cProductProcessing != null)
+                using (var context = new Model())
                 {
-                    if (context.C_ProductQualityData.Any(s =>
-                        s.ProductBornCode == ProductIDTxt.Text.Trim() && s.ProcedureCode ==
-                                                                      _cProductProcessing.ProcedureCode
-                                                                      && s.CheckType == (decimal?)CheckType.SelfCheck && s.CollectValue != null
-                                                                      && s.Online_type == _cProductProcessing.Online_type&&s.OfflineStaffID==null))
+                    //在产品加工过程表中根据产品出生证  获取元数据
+                    _cProductProcessing =
+                        context.C_ProductProcessing.FirstOrDefault(s => s.ProductBornCode == ProductIDTxt.Text.Trim());
+                    if (_cProductProcessing != null)
                     {
-                        ProductionStatusInfoPanel.Controls.Find("control002", false).First().BackColor
-                            = Color.MediumSeaGreen;
+                        if (context.C_ProductQualityData.Any(s =>
+                            s.ProductBornCode == ProductIDTxt.Text.Trim() && s.ProcedureCode ==
+                                                                          _cProductProcessing.ProcedureCode
+                                                                          && s.CheckType ==
+                                                                          (decimal?)CheckType.SelfCheck &&
+                                                                          s.CollectValue != null
+                                                                          && s.Online_type ==
+                                                                          _cProductProcessing.Online_type
+                                                                          && s.OfflineStaffID == null))
+                        {
+                            ProductionStatusInfoPanel.Controls.Find("control002", false).First().BackColor
+                                = Color.MediumSeaGreen;
+                        }
                     }
                 }
-            }
+            }));
         }
         //判断是否存在加工任务
         private bool HasExitProductTask()
@@ -1072,7 +1443,9 @@ namespace MachineryProcessingDemo.Forms
             {
                 //在产品加工过程表中根据加工中心编号和上线时间非空  判断本加工中心是否有正在处理的生产任务 
                 var cProductProcessing = context.C_ProductProcessing
-                    .FirstOrDefault(s => s.WorkshopCode == _workshopCode && s.OnlineTime != null);
+                    .FirstOrDefault(s =>
+                        s.WorkshopCode == _workshopCode && s.OnlineTime != null &&
+                        s.EquipmentCode.ToString() == _equipmentCode && s.EquipmentCode == _equipmentCode);
                 if (cProductProcessing != null)
                 {
                     FrmDialog.ShowDialog(this, "当前已有正在处理的生产任务,请完成", "已有生产任务");
@@ -1124,7 +1497,7 @@ namespace MachineryProcessingDemo.Forms
                         ProductionStatusInfoPanel.Controls.Find("control003", false).First().BackColor =
                             Color.LightSlateGray;
                     },
-                    RegetProcedureTasksDetails = InialToDoTasks,
+                    RegetProcedureTasksDetails = InitialToDoTasks,
                     ClearMainPanelTxt = () =>
                      {
                          ProductIDTxt.Clear();
@@ -1191,7 +1564,15 @@ namespace MachineryProcessingDemo.Forms
                     }
                 };
                 panel10.Controls.Add(scanOnlineForm);
-                scanOnlineForm.Show();
+                try
+                {
+                    scanOnlineForm.Show();
+                }
+                catch
+                {
+                    //如果展示不出来的话 就说明被dispose掉了 说明端口有问题
+                    scanOnlineForm.Close();
+                }
             }
             else
             {
@@ -1328,7 +1709,7 @@ namespace MachineryProcessingDemo.Forms
                 RegetProcedureTasksDetails = () =>
                 {
                     InitialDidTasks();
-                    InialToDoTasks();
+                    InitialToDoTasks();
                 },
                 HideLabel = () =>
                  {
@@ -1433,18 +1814,14 @@ namespace MachineryProcessingDemo.Forms
 
         private void OpenLoginForm(object sender, EventArgs e)
         {
-            // FrmInputs frm = new FrmInputs("盛鼎---加工中心001",
-            //     new string[] { "账号", "密码", "身份证号", "住址" },
-            //     new Dictionary<string, HZH_Controls.TextInputType>() { { "电话", HZH_Controls.TextInputType.Regex }, { "身份证号", HZH_Controls.TextInputType.Regex } },
-            //     new Dictionary<string, string>() { { "电话", "^1\\d{0,10}$" }, { "身份证号", "^\\d{0,18}$" } },
-            //     new Dictionary<string, KeyBoardType>() { { "电话", KeyBoardType.UCKeyBorderNum }, { "身份证号", KeyBoardType.UCKeyBorderNum } },
-            //     new List<string>() { "账号", "密码", "身份证号" });
-            // frm.ShowDialog(this);
             new UserLoginForm().Show();
 
             C_LoginInProcessing cLoginInProcessing;
             using (var context = new Model())
             {
+                var cEquipmentInfomation = context.C_EquipmentInfomation.FirstOrDefault(s=>s.EquipmentCode.ToString()==_equipmentCode&&s.IsAvailable==true&&s.IsEnable==true);
+                _equipmentId = cEquipmentInfomation.ID.ToString(); 
+
                 cLoginInProcessing = context.C_LoginInProcessing.FirstOrDefault(s =>
                     s.StaffCode == EmployeeIDTxt.Text && s.EquipmentID.ToString() == _equipmentId &&
                     s.OfflineTime == null);
@@ -1468,6 +1845,9 @@ namespace MachineryProcessingDemo.Forms
             C_LoginInProcessing cLoginInProcessing;
             using (var context = new Model())
             {
+                var cEquipmentInfomation = context.C_EquipmentInfomation.FirstOrDefault(s=>s.IsAvailable==true&&s.IsEnable==true&&s.EquipmentCode.ToString()==_equipmentCode);
+                _equipmentId = cEquipmentInfomation.ID.ToString(); 
+
                 cLoginInProcessing = context.C_LoginInProcessing.FirstOrDefault(s =>
                     s.StaffCode == EmployeeIDTxt.Text && s.EquipmentID.ToString() == _equipmentId && s.OfflineTime == null);
                 if (cLoginInProcessing != null) cLoginInProcessing.OfflineTime = context.GetServerDate();
@@ -1533,7 +1913,7 @@ namespace MachineryProcessingDemo.Forms
                             ,
                         RegetProcedureTasksDetails = () =>
                         {
-                            InialToDoTasks();
+                            InitialToDoTasks();
                         }
                         // ChangeBgColor = () => ProductOnlineLbl.BackColor = Color.MediumSeaGreen
                     };
@@ -1548,29 +1928,32 @@ namespace MachineryProcessingDemo.Forms
         }
 
         //代码生成label 
-        private Label GenerateLabel()
+        private async Task<Label> GenerateLabel()
         {
             var icon = (FontIcons)Enum.Parse(typeof(FontIcons), MuneList[_tupleI].Item2);
-            var label = new Label
+            return await Task.Run(new Func<Label>((() =>
             {
-                AutoSize = false,
-                Size = new Size(90, 60),
-                ForeColor = Color.White,
-                TextAlign = ContentAlignment.BottomCenter,
-                ImageAlign = ContentAlignment.TopCenter,
-                Margin = new Padding(5),
-                Text = MuneList[_tupleI].Item1,
-                Image = FontImages.GetImage(icon, 32, Color.White),
-                Location = new Point(_widthX, 0),
-                Font = new Font("微软雅黑", 12, FontStyle.Bold)
-            };
-            FirstTitlePanel.Controls.Add(label);
-            _widthX += 90;
-            _tupleI++;
-            return label;
+                var label = new Label
+                {
+                    AutoSize = false,
+                    Size = new Size(90, 60),
+                    ForeColor = Color.White,
+                    TextAlign = ContentAlignment.BottomCenter,
+                    ImageAlign = ContentAlignment.TopCenter,
+                    Margin = new Padding(5),
+                    Text = MuneList[_tupleI].Item1,
+                    Image = FontImages.GetImage(icon, 32, Color.White),
+                    Location = new Point(_widthX, 0),
+                    Font = new Font("微软雅黑", 12, FontStyle.Bold)
+                };
+
+                _widthX += 90;
+                _tupleI++;
+                return label;
+            })));
         }
 
-        public void LoginUserTurnArchives(C_LoginInProcessing cLoginInProcessing)
+        private void LoginUserTurnArchives(C_LoginInProcessing cLoginInProcessing)
         {
             var mapperConfiguration = new MapperConfiguration(cfg => cfg.CreateMap<C_LoginInProcessing, C_LoginInDocument>());
             var mapper = mapperConfiguration.CreateMapper();

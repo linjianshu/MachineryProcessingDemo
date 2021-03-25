@@ -22,7 +22,7 @@ namespace MachineryProcessingDemo
         [StringLength(50)]
         public string ProcedureName { get; set; }
 
-        public int? ProcedureIndex { get; set; }
+        // public int? ProcedureIndex { get; set; }
 
         [StringLength(50)]
         public string StandardTaskSpan { get; set; }

@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineryProcessingDemo", "MachineryProcessingDemo.csproj", "{9E2C8307-D592-4A21-8497-CA54F82B1986}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotPressing", "..\HotPressing\HotPressing.csproj", "{47F21D0D-351E-4BB2-86F2-D544F7FB4133}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QualityCheckDemo", "..\QualityCheckDemo\QualityCheckDemo.csproj", "{D0831C50-496E-4F71-B6E8-94370983B71F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManualCheck", "..\ManualCheck\ManualCheck.csproj", "{17D5BD03-4F07-4C20-9B0D-C651CFB13F0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurnOverManage", "..\TurnOverManage\TurnOverManage.csproj", "{42F0DDA5-1306-4C70-85F6-8006F330E3FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkersGaugeTrace", "..\WorkersGaugeTrace\WorkersGaugeTrace.csproj", "{5BFEABD2-7175-4A53-9E28-8ED2528F69E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,26 @@ Global
 		{9E2C8307-D592-4A21-8497-CA54F82B1986}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E2C8307-D592-4A21-8497-CA54F82B1986}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E2C8307-D592-4A21-8497-CA54F82B1986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F21D0D-351E-4BB2-86F2-D544F7FB4133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F21D0D-351E-4BB2-86F2-D544F7FB4133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F21D0D-351E-4BB2-86F2-D544F7FB4133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F21D0D-351E-4BB2-86F2-D544F7FB4133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0831C50-496E-4F71-B6E8-94370983B71F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0831C50-496E-4F71-B6E8-94370983B71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0831C50-496E-4F71-B6E8-94370983B71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0831C50-496E-4F71-B6E8-94370983B71F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17D5BD03-4F07-4C20-9B0D-C651CFB13F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D5BD03-4F07-4C20-9B0D-C651CFB13F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D5BD03-4F07-4C20-9B0D-C651CFB13F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D5BD03-4F07-4C20-9B0D-C651CFB13F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F0DDA5-1306-4C70-85F6-8006F330E3FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F0DDA5-1306-4C70-85F6-8006F330E3FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F0DDA5-1306-4C70-85F6-8006F330E3FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F0DDA5-1306-4C70-85F6-8006F330E3FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BFEABD2-7175-4A53-9E28-8ED2528F69E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BFEABD2-7175-4A53-9E28-8ED2528F69E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BFEABD2-7175-4A53-9E28-8ED2528F69E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BFEABD2-7175-4A53-9E28-8ED2528F69E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

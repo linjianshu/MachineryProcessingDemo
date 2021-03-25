@@ -148,29 +148,9 @@
       <DependentUpon>FrmInputs.cs</DependentUpon>
     </Compile>
     <Compile Include="helper\GlobalClass.cs" />
-    <Compile Include="Migrations\202103170925436_BuildDatabase.cs" />
-    <Compile Include="Migrations\202103170925436_BuildDatabase.Designer.cs">
-      <DependentUpon>202103170925436_BuildDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103180810159_changeImageType.cs" />
-    <Compile Include="Migrations\202103180810159_changeImageType.Designer.cs">
-      <DependentUpon>202103180810159_changeImageType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103180815303_lalala.cs" />
-    <Compile Include="Migrations\202103180815303_lalala.Designer.cs">
-      <DependentUpon>202103180815303_lalala.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103200926210_addQualityData_OnlineType.cs" />
-    <Compile Include="Migrations\202103200926210_addQualityData_OnlineType.Designer.cs">
-      <DependentUpon>202103200926210_addQualityData_OnlineType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103200931223_addQualityData_OnlineType1.cs" />
-    <Compile Include="Migrations\202103200931223_addQualityData_OnlineType1.Designer.cs">
-      <DependentUpon>202103200931223_addQualityData_OnlineType1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103210918359_addhuishen.cs" />
-    <Compile Include="Migrations\202103210918359_addhuishen.Designer.cs">
-      <DependentUpon>202103210918359_addhuishen.cs</DependentUpon>
+    <Compile Include="Migrations\202103261210294_newdb.cs" />
+    <Compile Include="Migrations\202103261210294_newdb.Designer.cs">
+      <DependentUpon>202103261210294_newdb.cs</DependentUpon>
     </Compile>
     <Compile Include="POCO\KitProcessingDocument.cs" />
     <Compile Include="Forms\LoginForm.cs">
@@ -388,23 +368,8 @@
     <EmbeddedResource Include="CustomControls\PictureText.resx">
       <DependentUpon>PictureText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103170925436_BuildDatabase.resx">
-      <DependentUpon>202103170925436_BuildDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103180810159_changeImageType.resx">
-      <DependentUpon>202103180810159_changeImageType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103180815303_lalala.resx">
-      <DependentUpon>202103180815303_lalala.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103200926210_addQualityData_OnlineType.resx">
-      <DependentUpon>202103200926210_addQualityData_OnlineType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103200931223_addQualityData_OnlineType1.resx">
-      <DependentUpon>202103200931223_addQualityData_OnlineType1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103210918359_addhuishen.resx">
-      <DependentUpon>202103210918359_addhuishen.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202103261210294_newdb.resx">
+      <DependentUpon>202103261210294_newdb.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

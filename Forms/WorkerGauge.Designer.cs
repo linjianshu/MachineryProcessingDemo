@@ -80,7 +80,7 @@ namespace MachineryProcessingDemo.Forms
             this.ToolingIdTxt.Location = new System.Drawing.Point(270, 78);
             this.ToolingIdTxt.Name = "ToolingIdTxt";
             this.ToolingIdTxt.Size = new System.Drawing.Size(143, 32);
-            this.ToolingIdTxt.TabIndex = 6;
+            this.ToolingIdTxt.TabIndex = 1;
             // 
             // ToolingNameTxt
             // 
@@ -88,7 +88,7 @@ namespace MachineryProcessingDemo.Forms
             this.ToolingNameTxt.Location = new System.Drawing.Point(270, 139);
             this.ToolingNameTxt.Name = "ToolingNameTxt";
             this.ToolingNameTxt.Size = new System.Drawing.Size(143, 32);
-            this.ToolingNameTxt.TabIndex = 6;
+            this.ToolingNameTxt.TabIndex = 2;
             // 
             // label1
             // 
@@ -111,7 +111,7 @@ namespace MachineryProcessingDemo.Forms
             this.ToolingTypeTxt.Location = new System.Drawing.Point(270, 198);
             this.ToolingTypeTxt.Name = "ToolingTypeTxt";
             this.ToolingTypeTxt.Size = new System.Drawing.Size(143, 32);
-            this.ToolingTypeTxt.TabIndex = 6;
+            this.ToolingTypeTxt.TabIndex = 3;
             // 
             // WorkerGauge
             // 

@@ -58,7 +58,7 @@ namespace MachineryProcessingDemo.Forms
             this.ProductIDTxt.Location = new System.Drawing.Point(244, 125);
             this.ProductIDTxt.Name = "ProductIDTxt";
             this.ProductIDTxt.Size = new System.Drawing.Size(143, 32);
-            this.ProductIDTxt.TabIndex = 6;
+            this.ProductIDTxt.TabIndex = 2;
             // 
             // ProductIDLbl
             // 
@@ -77,7 +77,7 @@ namespace MachineryProcessingDemo.Forms
             this.ProductNameTxt.Location = new System.Drawing.Point(244, 71);
             this.ProductNameTxt.Name = "ProductNameTxt";
             this.ProductNameTxt.Size = new System.Drawing.Size(143, 32);
-            this.ProductNameTxt.TabIndex = 7;
+            this.ProductNameTxt.TabIndex = 1;
             // 
             // ProductNameLbl
             // 
@@ -100,8 +100,9 @@ namespace MachineryProcessingDemo.Forms
             this.comboBox1.Location = new System.Drawing.Point(244, 175);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(143, 33);
-            this.comboBox1.TabIndex = 9;
+            this.comboBox1.TabIndex = 3;
             this.comboBox1.Text = "正常下机";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             // 
             // ProductType
@@ -132,7 +133,7 @@ namespace MachineryProcessingDemo.Forms
             this.richTextBox1.Location = new System.Drawing.Point(244, 213);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(252, 53);
-            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             this.richTextBox1.Visible = false;
             // 

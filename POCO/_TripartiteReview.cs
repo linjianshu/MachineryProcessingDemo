@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace QualityCheckDemo.POCO
 {
     [Table("_TripartiteReview")]
-
     public partial class _TripartiteReview
     {
         public long ID { get; set; }
@@ -18,7 +17,7 @@ namespace QualityCheckDemo.POCO
         [StringLength(50)]
         public string ReviewTaskCode { get; set; }
         [StringLength(50)]
-        public string ProductbornCode { get; set; }
+        public string ProductBornCode { get; set; }
         public DateTime? HappenTime { get; set; }
         [StringLength(50)]
         public string TechnicalDirectorCode { get; set; }
@@ -54,13 +53,13 @@ namespace QualityCheckDemo.POCO
         [StringLength(50)]
         public string TechnicalFillerCode { get; set; }
         [StringLength(50)]
-        public string TechnicalfillerName { get; set; }
+        public string TechnicalFillerName { get; set; }
         [StringLength(50)]
         public string ReworkDescription { get; set; }
         public int? InspectionResultType { get; set; }
         [StringLength(50)]
         public string InspectionResultDescription { get; set; }
-        public int? CheckStaffID { get; set; }
+        public long? CheckStaffID { get; set; }
         [StringLength(50)]
         public string CheckStaffCode { get; set; }
         [StringLength(50)]
@@ -70,17 +69,17 @@ namespace QualityCheckDemo.POCO
         public decimal? RepairCost { get; set; }
         public decimal? OtherCost { get; set; }
         public decimal? Sum { get; set; }
-        public long? ProcurementReviewerIDP { get; set; }
+        public long? ProcurementReviewerID { get; set; }
         [StringLength(50)]
         public string ProcurementReviewerCode { get; set; }
         [StringLength(50)]
-        public string ProcerementReviewerName { get; set; }
-        public long? ProductionReviewID { get; set; }
+        public string ProcurementReviewerName { get; set; }
+        public long? ProductionReviewerID { get; set; }
         [StringLength(50)]
         public string ProductionReviewerCode { get; set; }
         [StringLength(50)]
         public string ProductionReviewerName { get; set; }
-        public bool? IsAvaiable { get; set; }
+        public bool? IsAvailable { get; set; }
 
         public DateTime? CreateTime { get; set; }
         [StringLength(50)]
@@ -106,7 +105,7 @@ namespace QualityCheckDemo.POCO
         public string ReworkStaffCode { get; set; }
         [StringLength(50)]
         public string ReworkStaffName { get; set; }
-        public DateTime? ReworkCreateTime { get; set;  }
+        public DateTime? ReworkCreateTime { get; set; }
 
     }
 

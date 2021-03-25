@@ -32,10 +32,13 @@ namespace MachineryProcessingDemo
                     if (apsProcedureTask != null)
                     {
                         var imageBytes = context.A_ProductBase.FirstOrDefault(s => s.ProductCode == apsProcedureTask.ProductCode && s.IsAvailable == true)?.Image;
-                        var memoryStream = new MemoryStream(imageBytes);
+                        if (imageBytes!=null)
+                        {
+                             var memoryStream = new MemoryStream(imageBytes);
                         var fromStream = Image.FromStream(memoryStream);
                         this.BackgroundImage = fromStream;
                         this.BackgroundImageLayout = ImageLayout.Zoom; 
+                        }
                     }
                 }
                 // string strIcon = "E_icon_star";

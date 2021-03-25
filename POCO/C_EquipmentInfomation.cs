@@ -11,8 +11,7 @@ namespace MachineryProcessingDemo
     {
         public long ID { get; set; }
 
-        [StringLength(50)]
-        public string EquipmentCode { get; set; }
+        public int? EquipmentCode { get; set; }
 
         public long? EquipmentGroupID { get; set; }
 
@@ -25,8 +24,7 @@ namespace MachineryProcessingDemo
         [StringLength(50)]
         public string EquipmentCategory { get; set; }
 
-        [StringLength(50)]
-        public string EquipmentType { get; set; }
+        public int? EquipmentType { get; set; }
 
         [StringLength(50)]
         public string EquipmentModel { get; set; }

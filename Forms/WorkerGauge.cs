@@ -97,7 +97,10 @@ namespace MachineryProcessingDemo.Forms
             if (dialogResult == DialogResult.OK)
             {
                 BindingTooling();
-                FrmDialog.ShowDialog(this, "绑定成功!");
+
+                FrmTips.ShowTips(null, "绑定成功!", 2000, false, ContentAlignment.BottomCenter, null,
+                    TipsSizeMode.Medium, new Size(300, 50), TipsState.Success);
+                // FrmDialog.ShowDialog(this, "绑定成功!");
                 Close();
             }
             serialPort1.Close();

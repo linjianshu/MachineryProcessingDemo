@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QualityCheckDemo
+﻿namespace MachineryProcessingDemo.helper
 {
-    public enum ProductType
+    public enum ProductDocType
     {
         Normal  = 1 , 
         Scrap = 2 
@@ -111,8 +105,10 @@ namespace QualityCheckDemo
 
         public enum CstateState
         {
-            No = 0 , 
-            Yes  = 1
+            NoAndWaitToConfirm = 0 , 
+            NoAndOutofDate = 1 , 
+            Yes  = 2 , 
+
         }
 
         public enum QDOrProdutcProOnlineType

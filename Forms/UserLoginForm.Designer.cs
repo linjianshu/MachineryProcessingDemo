@@ -85,7 +85,7 @@ namespace MachineryProcessingDemo.Forms
             this.comfirmBtn.Location = new System.Drawing.Point(261, 345);
             this.comfirmBtn.Name = "comfirmBtn";
             this.comfirmBtn.Size = new System.Drawing.Size(107, 37);
-            this.comfirmBtn.TabIndex = 6;
+            this.comfirmBtn.TabIndex = 3;
             this.comfirmBtn.Text = "登录";
             this.comfirmBtn.UseVisualStyleBackColor = true;
             this.comfirmBtn.Click += new System.EventHandler(this.button1_Click);
@@ -126,7 +126,7 @@ namespace MachineryProcessingDemo.Forms
             this.AccountTxt.Location = new System.Drawing.Point(261, 219);
             this.AccountTxt.Name = "AccountTxt";
             this.AccountTxt.Size = new System.Drawing.Size(134, 27);
-            this.AccountTxt.TabIndex = 10;
+            this.AccountTxt.TabIndex = 1;
             this.AccountTxt.Text = "1018814650";
             // 
             // PwdTxt
@@ -134,7 +134,7 @@ namespace MachineryProcessingDemo.Forms
             this.PwdTxt.Location = new System.Drawing.Point(261, 272);
             this.PwdTxt.Name = "PwdTxt";
             this.PwdTxt.Size = new System.Drawing.Size(134, 27);
-            this.PwdTxt.TabIndex = 10;
+            this.PwdTxt.TabIndex = 2;
             this.PwdTxt.Text = "lalala123";
             // 
             // UserLoginForm

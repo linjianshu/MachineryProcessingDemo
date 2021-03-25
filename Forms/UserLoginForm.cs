@@ -90,7 +90,9 @@ namespace MachineryProcessingDemo.Forms
                 {
                     if (cStaffBaseInformation.Password == pwd)
                     {
-                        FrmDialog.ShowDialog(this, "登陆成功,欢迎使用!", "登陆成功");
+                        FrmTips.ShowTips(null, "登陆成功,欢迎使用!", 2000, false, ContentAlignment.BottomCenter, null,
+                            TipsSizeMode.Medium, new Size(300, 50), TipsState.Success);
+                        // FrmDialog.ShowDialog(this, "登陆成功,欢迎使用!", "登陆成功");
                         this.Hide();
 
                         string strIp = "";
@@ -101,6 +103,9 @@ namespace MachineryProcessingDemo.Forms
 
                         if (!cStaffBaseInformation.Account.Contains("admin"))
                         {
+                            var cEquipmentInfomation = context.C_EquipmentInfomation.FirstOrDefault(s => s.IsAvailable == true && s.IsEnable == true && s.EquipmentCode.ToString() == _equipmentCode);
+                            _equipmentId = cEquipmentInfomation.ID.ToString();
+
                             int.TryParse(_equipmentId, out var result);
                             //在登陆过程表中插入数据
                             var cLoginInProcessing = new C_LoginInProcessing()
@@ -124,6 +129,8 @@ namespace MachineryProcessingDemo.Forms
                     }
                     else
                     {
+                        // FrmTips.ShowTips(this, "密码错误,请重试!", 1000, false, ContentAlignment.MiddleCenter, null,
+                        //     TipsSizeMode.Medium, new Size(300, 50), TipsState.Error);
                         FrmDialog.ShowDialog(this, "密码错误,请重试!", "登陆失败");
                     }
                 }

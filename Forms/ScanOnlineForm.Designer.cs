@@ -57,7 +57,7 @@ namespace MachineryProcessingDemo.Forms
             this.ProductNameTxt.Location = new System.Drawing.Point(241, 154);
             this.ProductNameTxt.Name = "ProductNameTxt";
             this.ProductNameTxt.Size = new System.Drawing.Size(143, 32);
-            this.ProductNameTxt.TabIndex = 3;
+            this.ProductNameTxt.TabIndex = 2;
             // 
             // ProductNameLbl
             // 
@@ -110,8 +110,9 @@ namespace MachineryProcessingDemo.Forms
             this.comboBox1.Location = new System.Drawing.Point(241, 103);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(143, 33);
-            this.comboBox1.TabIndex = 4;
+            this.comboBox1.TabIndex = 1;
             this.comboBox1.Text = "产品";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             // 
             // serialPortTest
